@@ -1,6 +1,6 @@
 {
   "name": "lingman-pub",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "index.js",
   "packageManager": "pnpm@7.3.0",

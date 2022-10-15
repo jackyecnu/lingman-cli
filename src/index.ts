@@ -25,7 +25,8 @@ export default async function () {
   program
     .command('git')
     .description('git提交 默认提交工作区所有文件')
-    .action(() => { gitPush() })
+    .option('-m, --message <message>', '提交信息')
+    .action((options) => { gitPush(options.message) })
 
   program
     .command('sync')

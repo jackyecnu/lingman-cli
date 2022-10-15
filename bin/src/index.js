@@ -9,7 +9,6 @@ const commander_1 = require("commander");
 const chalk_1 = __importDefault(require("chalk"));
 const co_1 = require("./co");
 const open_1 = require("./open");
-const git_1 = require("./git");
 const sync_1 = require("./sync");
 const build_1 = require("./build");
 const program = new commander_1.Command();
@@ -24,7 +23,8 @@ async function default_1() {
     program
         .command('git')
         .description('git提交 默认提交工作区所有文件')
-        .action(() => { (0, git_1.gitPush)(); });
+        .option('-m, --message <message>', '提交信息')
+        .action((options) => { console.log(options); });
     program
         .command('sync')
         .description('同步远程数据库表结构到本地')

@@ -2,5 +2,5 @@ export declare function createController({ ApiPath, BLLPath, ModelPath, ServiceN
     ApiPath: any;
     BLLPath: any;
     ModelPath: any;
-    ServiceNamespace: any;
+    ServiceNamespace?: string;
 }, args: any): void;

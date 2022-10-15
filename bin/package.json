@@ -1,6 +1,6 @@
 {
     "name": "lingman-pub",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "",
     "main": "index.js",
     "packageManager": "pnpm@7.3.0",
@@ -14,7 +14,7 @@
     "scripts": {
         "dev": "tsc && node ./bin/index.js",
         "build": "tsc",
-        "release": "npx bumpp && npm publish --registry https://registry.npmjs.org",
+        "release": "npx bumpp",
         "lint:fix": "eslint . --fix",
         "lint": "eslint ."
     },

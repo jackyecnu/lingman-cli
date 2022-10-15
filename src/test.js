@@ -1,3 +1,0 @@
-export test(){
-  return "test"
-}

@@ -3,18 +3,22 @@ import fs from 'fs'
 import path from 'path'
 import { Command } from 'commander'
 import chalk from 'chalk'
+import { version } from '../package.json'
 import { createController } from './co'
 import { openDocs, openDocs1, openLog } from './open'
 import { gitPush } from './git'
 import { sync } from './sync'
 import { build } from './build'
+import { checkVersion } from './utils/checkVersion'
 
 const program = new Command()
 
-if (!fs.existsSync(path.resolve(process.cwd(), 'lingman.config.js')))
+const configPath = path.resolve(process.cwd(), 'lingman.config.js')
+
+if (!fs.existsSync(configPath))
   console.log(chalk.red('当前目录下不存在 lingman.config.js 配置文件, 请先创建'))
 
-const config = require(path.resolve(process.cwd(), 'lingman.config.js'))
+const config = require(configPath)
 
 export default async function () {
   program
@@ -53,5 +57,7 @@ export default async function () {
     .description('打开在线Api文档')
     .action(() => { openDocs1(config) })
 
+  program.version(version, '-v, --version', '查看版本号')
   program.parse()
+  checkVersion()
 }

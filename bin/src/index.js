@@ -7,14 +7,18 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const commander_1 = require("commander");
 const chalk_1 = __importDefault(require("chalk"));
+const package_json_1 = require("../package.json");
 const co_1 = require("./co");
 const open_1 = require("./open");
+const git_1 = require("./git");
 const sync_1 = require("./sync");
 const build_1 = require("./build");
+const checkVersion_1 = require("./utils/checkVersion");
 const program = new commander_1.Command();
-if (!fs_1.default.existsSync(path_1.default.resolve(process.cwd(), 'lingman.config.js')))
+const configPath = path_1.default.resolve(process.cwd(), 'lingman.config.js');
+if (!fs_1.default.existsSync(configPath))
     console.log(chalk_1.default.red('当前目录下不存在 lingman.config.js 配置文件, 请先创建'));
-const config = require(path_1.default.resolve(process.cwd(), 'lingman.config.js'));
+const config = require(configPath);
 async function default_1() {
     program
         .command('co')
@@ -24,7 +28,7 @@ async function default_1() {
         .command('git')
         .description('git提交 默认提交工作区所有文件')
         .option('-m, --message <message>', '提交信息')
-        .action((options) => { console.log(options); });
+        .action((options) => { (0, git_1.gitPush)(options.message); });
     program
         .command('sync')
         .description('同步远程数据库表结构到本地')
@@ -45,6 +49,8 @@ async function default_1() {
         .command('docs1')
         .description('打开在线Api文档')
         .action(() => { (0, open_1.openDocs1)(config); });
+    program.version(package_json_1.version, '-v, --version', '查看版本号');
     program.parse();
+    (0, checkVersion_1.checkVersion)();
 }
 exports.default = default_1;

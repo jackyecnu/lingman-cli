@@ -2,11 +2,10 @@
 import fs from 'fs'
 import chalk from 'chalk'
 
-export function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace = '' }, args) {
+export function createController({ ApiPath, BLLPath, ModelPath }, args) {
   if (!ApiPath) return console.log(chalk.red('缺少ApiPath配置'))
   if (!BLLPath) return console.log(chalk.red('缺少BLLPath配置'))
   if (!ModelPath) return console.log(chalk.red('缺少ModelPath配置'))
-  if (ServiceNamespace === undefined) return console.log(chalk.red('缺少ServiceNamespace配置'))
   if (args.length === 0) {
     console.log('\x1B[33m%s\x1B[0m', '需要传入Controller参数')
     return
@@ -55,8 +54,7 @@ export function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace
   using ${ModelPath}.EntitiesModel.maindb;
   using Microsoft.Extensions.Caching.Distributed;
   using NAutowired.Core.Attributes;
-  using System;
-  ${ServiceNamespace}
+  using System; 
   
   namespace ${BLLPath}.Service${namespace_dot}
   {

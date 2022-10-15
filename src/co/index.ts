@@ -2,7 +2,7 @@
 import fs from 'fs'
 import chalk from 'chalk'
 
-export function createController({ ApiPath, BLLPath, ModelPath }, args) {
+export function createController({ ApiPath, BLLPath, ModelPath }, args: string[]) {
   if (!ApiPath) return console.log(chalk.red('缺少ApiPath配置'))
   if (!BLLPath) return console.log(chalk.red('缺少BLLPath配置'))
   if (!ModelPath) return console.log(chalk.red('缺少ModelPath配置'))
@@ -17,7 +17,7 @@ export function createController({ ApiPath, BLLPath, ModelPath }, args) {
     enumerable: false,
   })
 
-  const nameArr = process.argv[2].split('.')
+  const nameArr = args[0].split('.')
   // @ts-expect-error xxx
   const class_name = nameArr[nameArr.length - 1].capitalize()
   nameArr.pop()

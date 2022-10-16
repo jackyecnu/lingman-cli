@@ -24,7 +24,7 @@ export default async function () {
   program
     .command('co')
     .description('创建Controller , 文件目录以.分割')
-    .action(() => { createController(config, program.args.slice(1)) })
+    .action(() => { createController(config.co, program.args.slice(1)) })
 
   program
     .command('git')

@@ -1,6 +1,5 @@
-export declare function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace }: {
+export declare function createController({ ApiPath, BLLPath, ModelPath }: {
     ApiPath: any;
     BLLPath: any;
     ModelPath: any;
-    ServiceNamespace?: string;
-}, args: any): void;
+}, args: string[]): void;

@@ -23,7 +23,7 @@ async function default_1() {
     program
         .command('co')
         .description('创建Controller , 文件目录以.分割')
-        .action(() => { (0, co_1.createController)(config, program.args.slice(1)); });
+        .action(() => { (0, co_1.createController)(config.co, program.args.slice(1)); });
     program
         .command('git')
         .description('git提交 默认提交工作区所有文件')

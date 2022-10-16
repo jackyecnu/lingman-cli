@@ -6,15 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createController = void 0;
 const fs_1 = __importDefault(require("fs"));
 const chalk_1 = __importDefault(require("chalk"));
-function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace = '' }, args) {
+function createController({ ApiPath, BLLPath, ModelPath }, args) {
     if (!ApiPath)
         return console.log(chalk_1.default.red('缺少ApiPath配置'));
     if (!BLLPath)
         return console.log(chalk_1.default.red('缺少BLLPath配置'));
     if (!ModelPath)
         return console.log(chalk_1.default.red('缺少ModelPath配置'));
-    if (ServiceNamespace === undefined)
-        return console.log(chalk_1.default.red('缺少ServiceNamespace配置'));
     if (args.length === 0) {
         console.log('\x1B[33m%s\x1B[0m', '需要传入Controller参数');
         return;
@@ -25,7 +23,7 @@ function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace = '' }
         },
         enumerable: false,
     });
-    const nameArr = process.argv[2].split('.');
+    const nameArr = args[0].split('.');
     const class_name = nameArr[nameArr.length - 1].capitalize();
     nameArr.pop();
     const namespace_dot = nameArr.reduce((pre, cur) => `${pre}.${cur.capitalize()}`, '');
@@ -56,8 +54,7 @@ function createController({ ApiPath, BLLPath, ModelPath, ServiceNamespace = '' }
   using ${ModelPath}.EntitiesModel.maindb;
   using Microsoft.Extensions.Caching.Distributed;
   using NAutowired.Core.Attributes;
-  using System;
-  ${ServiceNamespace}
+  using System; 
   
   namespace ${BLLPath}.Service${namespace_dot}
   {

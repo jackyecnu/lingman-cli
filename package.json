@@ -1,6 +1,6 @@
 {
   "name": "lingman-pub",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "",
   "main": "index.js",
   "packageManager": "pnpm@7.3.0",
@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "tsc && node ./bin/index.js",
     "build": "tsc",
-    "release": "bumpp patch --no-push && pnpm run dev git -m release",
+    "release": "bumpp patch --commit --push --all --tag",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },

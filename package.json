@@ -1,6 +1,6 @@
 {
   "name": "lingman-pub",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "index.js",
   "packageManager": "pnpm@7.3.0",
@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "tsc && node ./bin/index.js",
     "build": "tsc",
-    "release": "npx bumpp",
+    "release": "bumpp patch --commit --push --tag  ./package.json",
     "lint:fix": "eslint . --fix",
     "lint": "eslint ."
   },
@@ -34,6 +34,7 @@
     "@djie/eslint-config": "^1.0.16",
     "@types/node": "^18.11.0",
     "eslint": "^8.23.1",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "bumpp": "^8.2.1"
   }
 }

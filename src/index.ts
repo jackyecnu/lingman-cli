@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import fs from 'fs'
 import path from 'path'
 import { Command } from 'commander'
-import chalk from 'chalk'
 import { version } from '../package.json'
 import { createController } from './co'
 import { openDocs, openDocs1, openLog } from './open'
@@ -16,10 +14,10 @@ const program = new Command()
 
 const configPath = path.resolve(process.cwd(), 'lingman.config.js')
 
-if (!fs.existsSync(configPath))
-  console.log(chalk.red('当前目录下不存在 lingman.config.js 配置文件, 请先创建'))
+let config = { co: {} } as any
 
-const config = require(configPath)
+if (fs.existsSync(configPath))
+  config = require(configPath)
 
 export default async function () {
   program

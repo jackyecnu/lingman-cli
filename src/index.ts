@@ -9,6 +9,7 @@ import { openDocs, openDocs1, openLog } from './open'
 import { gitPush } from './git'
 import { sync } from './sync'
 import { build } from './build'
+import { update } from './update'
 import { checkVersion } from './utils/checkVersion'
 
 const program = new Command()
@@ -56,6 +57,11 @@ export default async function () {
     .command('docs1')
     .description('打开在线Api文档')
     .action(() => { openDocs1(config) })
+
+  program
+    .command('update')
+    .description('更新Api')
+    .action(() => { update() })
 
   program.version(version, '-v, --version', '查看版本号')
   program.parse()

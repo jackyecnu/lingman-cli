@@ -2,14 +2,14 @@ import fs from 'fs'
 import path from 'path'
 import { Command } from 'commander'
 import { version } from '../package.json'
-import { createController } from './co'
-import { openDocs, openDocs1, openLog } from './open'
-import { gitPush } from './git'
-import { sync } from './sync'
 import { build } from './build'
+import { createController } from './co'
+import { gitPush } from './git'
+import { initHelper } from './init-helper'
+import { openDocs, openDocs1, openLog } from './open'
+import { sync } from './sync'
 import { update } from './update'
 import { checkVersion } from './utils/checkVersion'
-import { initConfig } from './init-config'
 
 const program = new Command()
 
@@ -63,9 +63,9 @@ export default async function () {
     .action(() => { update() })
 
   program
-    .command('initconfig')
+    .command('initHelper')
     .description('初始化配置')
-    .action(() => { initConfig(config.initConfig) })
+    .action(() => { initHelper(config.initHelper) })
 
   program.version(version, '-v, --version', '查看版本号')
   program.parse()

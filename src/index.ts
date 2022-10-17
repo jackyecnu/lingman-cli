@@ -2,11 +2,12 @@ import fs from 'fs'
 import path from 'path'
 import { Command } from 'commander'
 import { version } from '../package.json'
-import { createController } from './co'
-import { openDocs, openDocs1, openLog } from './open'
-import { gitPush } from './git'
-import { sync } from './sync'
 import { build } from './build'
+import { createController } from './co'
+import { gitPush } from './git'
+import { initHelper } from './init-helper'
+import { openDocs, openDocs1, openLog } from './open'
+import { sync } from './sync'
 import { update } from './update'
 import { checkVersion } from './utils/checkVersion'
 
@@ -14,7 +15,7 @@ const program = new Command()
 
 const configPath = path.resolve(process.cwd(), 'lingman.config.js')
 
-let config = { co: {} } as any
+let config = { co: {}, initConfig: {} } as any
 
 if (fs.existsSync(configPath))
   config = require(configPath)
@@ -60,6 +61,11 @@ export default async function () {
     .command('update')
     .description('更新Api')
     .action(() => { update() })
+
+  program
+    .command('initHelper')
+    .description('初始化配置')
+    .action(() => { initHelper(config.initHelper) })
 
   program.version(version, '-v, --version', '查看版本号')
   program.parse()

@@ -34,7 +34,7 @@ ${args[0].includes('.') ? `using ${ApiPath}.Controllers;` : ''}
 
 namespace ${ApiPath}.Controllers${namespace_dot}
 {
-    [Route("api${namespace_slash}/[controller]")]
+    [Route("api${namespace_slash.toLowerCase()}/${class_name.toLowerCase()}")]
     public class ${class_name}Controller : BaseController
     {
         private new DemonSession session

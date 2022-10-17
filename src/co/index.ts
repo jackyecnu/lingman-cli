@@ -28,22 +28,23 @@ export function createController({ ApiPath, BLLPath, ModelPath }, args: string[]
   const namespace_slash = nameArr.reduce((pre, cur) => `${pre}/${cur.capitalize()}`, '')
 
   const controllerFile = `using ${BLLPath}.Service${namespace_dot};
-  using Microsoft.AspNetCore.Mvc;
-  using NAutowired.Core.Attributes;
-  
-  namespace ${ApiPath}.Controllers${namespace_dot}
-  {
-      [Route("api${namespace_slash}/[controller]")]
-      public class ${class_name}Controller : BaseController
-      {
-          private new DemonSession session
-          { get { return (DemonSession)base.session; } }
-  
-          [Autowired]
-          private readonly ${class_name}Service currentService; 
-      }
-  }
-  `
+using Microsoft.AspNetCore.Mvc;
+using NAutowired.Core.Attributes;
+${args[0].includes('.') ? `using ${ApiPath}.Controllers;` : ''}
+
+namespace ${ApiPath}.Controllers${namespace_dot}
+{
+    [Route("api${namespace_slash}/[controller]")]
+    public class ${class_name}Controller : BaseController
+    {
+        private new DemonSession session
+        { get { return (DemonSession)base.session; } }
+
+        [Autowired]
+        private readonly ${class_name}Service currentService; 
+    }
+}
+`
 
   fs.writeFile(`${ApiPath}/Controllers${namespace_slash}/${class_name}Controller.cs`, controllerFile, { flag: 'wx' }, (err) => {
     if (err) throw err
@@ -51,21 +52,20 @@ export function createController({ ApiPath, BLLPath, ModelPath }, args: string[]
   })
 
   const serviceFile = `using AutoMapper;
-  using ${ModelPath}.EntitiesModel.maindb;
-  using Microsoft.Extensions.Caching.Distributed;
-  using NAutowired.Core.Attributes;
-  using System; 
-  
-  namespace ${BLLPath}.Service${namespace_dot}
-  {
-      [Service]
-      public class ${class_name}Service : BaseService
-      {
-          private new DemonSession session
-          { get { return (DemonSession)base.session; } } 
-      }
-  }
-  `
+using ${BLLPath}.Service;
+using Microsoft.Extensions.Caching.Distributed;
+using NAutowired.Core.Attributes; 
+
+namespace ${BLLPath}.Service${namespace_dot}
+{
+    [Service]
+    public class ${class_name}Service : BaseService
+    {
+        private new DemonSession session
+        { get { return (DemonSession)base.session; } } 
+    }
+}
+`
 
   fs.writeFile(`${BLLPath}/Service${namespace_slash}/${class_name}Service.cs`, serviceFile, { flag: 'wx' }, (err) => {
     if (err) throw err

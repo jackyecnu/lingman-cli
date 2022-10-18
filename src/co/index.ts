@@ -2,7 +2,8 @@
 import fs from 'fs'
 import chalk from 'chalk'
 
-export function createController({ ApiPath, BLLPath, ModelPath }, args: string[]) {
+export function createController(config, args: string[]) {
+  const { ApiPath, BLLPath, ModelPath } = config.co
   if (!ApiPath) return console.log(chalk.red('缺少ApiPath配置'))
   if (!BLLPath) return console.log(chalk.red('缺少BLLPath配置'))
   if (!ModelPath) return console.log(chalk.red('缺少ModelPath配置'))

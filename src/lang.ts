@@ -14,6 +14,12 @@ export function langCommon(program) {
     .description('更新Api')
     .action(() => { update() })
 
+  program
+    .command('git')
+    .description('git提交 默认提交工作区所有文件')
+    .option('-m, --message <message>', '提交信息')
+    .action((options) => { gitPush(options.message) })
+
   program.version(version, '-v, --version', '查看版本号')
 }
 
@@ -23,12 +29,6 @@ export function langDotnet(program, config) {
     .command('co')
     .description('创建Controller , 文件目录以.分割')
     .action(() => { createController(config, program.args.slice(1)) })
-
-  program
-    .command('git')
-    .description('git提交 默认提交工作区所有文件')
-    .option('-m, --message <message>', '提交信息')
-    .action((options) => { gitPush(options.message) })
 
   program
     .command('sync')

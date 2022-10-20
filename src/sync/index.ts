@@ -11,13 +11,25 @@ export function sync(config, args: string[]) {
     command = sync
   } else {
     if (args.length == 0) {
-      console.log('\x1B[33m%s\x1B[0m', '请输入需要同步的数据库')
+      console.log('\x1B[33m%s\x1B[0m', '请输入需要同步的数据库:全部为all')
       for (var key in sync) {
         console.log(key)
       }
       return
     } 
-    command = sync[key.toString()]
+    if (args[0] == "all") {
+      for (var key in sync) {
+        const isWin = process.platform === 'win32'
+        if (isWin)
+          execSync(sync[key], { stdio: 'inherit', shell: 'powershell.exe' })
+        else
+          execSync(sync[key])
+      }
+      return
+    } else {
+      command = sync[args[0].toString()]
+    }
+   
   }
 
   const isWin = process.platform === 'win32'

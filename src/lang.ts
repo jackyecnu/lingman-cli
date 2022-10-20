@@ -34,7 +34,7 @@ export function langDotnet(program, config) {
   program
     .command('sync')
     .description('同步远程数据库表结构到本地')
-    .action(() => { sync(config) })
+    .action(() => { sync(config , program.args.slice(1)) })
 
   program
     .command('build')

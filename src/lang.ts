@@ -3,7 +3,7 @@ import { build } from './build'
 import { createController } from './co'
 import { gitPush } from './git'
 import { initHelper } from './init-helper'
-import { openDocs, openDocs1, openLog } from './open'
+import { openDocs, openDocs1, openInBrowser, openLog } from './open'
 import { sync } from './sync'
 import { update } from './update'
 import { runShell } from './utils/runShell'
@@ -70,7 +70,5 @@ export function langDotnet(program, config) {
     runShell('dotnet tool update --global dotnet-ef')
   })
 }
-function openInBrowser(arg0: string) {
-  throw new Error('Function not implemented.')
-}
+ 
 

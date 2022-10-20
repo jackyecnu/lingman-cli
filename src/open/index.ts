@@ -16,7 +16,7 @@ export function openLog({ log }) {
   openInBrowser(log)
 }
 
-function openInBrowser(url) {
+export function openInBrowser(url) {
   const isWin = process.platform === 'win32'
   if (isWin)
     execSync(`start '${url}'`, { stdio: 'inherit', shell: 'powershell.exe' })

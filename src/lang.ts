@@ -20,6 +20,11 @@ export function langCommon(program) {
     .description('git提交 默认提交工作区所有文件')
     .option('-m, --message <message>', '提交信息')
     .action((options) => { gitPush(options.message) })
+  
+  program
+    .command('taobao')
+    .description('打开淘宝源去同步') 
+    .action((options) => { openInBrowser('https://www.npmmirror.com/package/lingman-pub')})
 
   program.version(version, '-v, --version', '查看版本号')
 }
@@ -65,3 +70,7 @@ export function langDotnet(program, config) {
     runShell('dotnet tool update --global dotnet-ef')
   })
 }
+function openInBrowser(arg0: string) {
+  throw new Error('Function not implemented.')
+}
+

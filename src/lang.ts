@@ -6,6 +6,7 @@ import { initHelper } from './init-helper'
 import { openDocs, openDocs1, openLog } from './open'
 import { sync } from './sync'
 import { update } from './update'
+import { runShell } from './utils/runShell'
 
 // 公共
 export function langCommon(program) {
@@ -59,4 +60,8 @@ export function langDotnet(program, config) {
     .command('initHelper')
     .description('初始化配置')
     .action(() => { initHelper(config.initHelper) })
+
+  program.command('eftool').description('ef tool 版本更新').action(() => {
+    runShell('dotnet tool update --global dotnet-ef')
+  })
 }

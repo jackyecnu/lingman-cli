@@ -21,10 +21,9 @@ export async function sync(config, args: string[]) {
           choices: Object.keys(sync).map(i => ({ name: i, value: sync[i] })),
         },
       ])
-      command = choose.type
-      return
+      command = sync[choose.type]
     }
-    if (args[0] === 'all') {
+    else if (args[0] === 'all') {
       for (const key in sync) {
         const isWin = process.platform === 'win32'
         if (isWin)

@@ -2,23 +2,23 @@ import { execSync } from 'child_process'
 import chalk from 'chalk'
 
 export function sync(config, args: string[]) {
-  let sync = config.sync
+  const sync = config.sync
   if (!sync) return console.log(chalk.red('缺少sync配置'))
 
-
-  let command:string = ""
-  if(typeof sync === "string") { // "string" 
+  let command = ''
+  if (typeof sync === 'string') { // "string"
     command = sync
-  } else {
-    if (args.length == 0) {
+  }
+  else {
+    if (args.length === 0) {
       console.log('\x1B[33m%s\x1B[0m', '请输入需要同步的数据库:全部为all')
-      for (var key in sync) {
+      for (const key in sync)
         console.log(key)
-      }
+
       return
-    } 
-    if (args[0] == "all") {
-      for (var key in sync) {
+    }
+    if (args[0] === 'all') {
+      for (const key in sync) {
         const isWin = process.platform === 'win32'
         if (isWin)
           execSync(sync[key], { stdio: 'inherit', shell: 'powershell.exe' })
@@ -26,10 +26,10 @@ export function sync(config, args: string[]) {
           execSync(sync[key])
       }
       return
-    } else {
+    }
+    else {
       command = sync[args[0].toString()]
     }
-   
   }
 
   const isWin = process.platform === 'win32'

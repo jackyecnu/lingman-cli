@@ -20,11 +20,11 @@ export function langCommon(program) {
     .description('git提交 默认提交工作区所有文件')
     .option('-m, --message <message>', '提交信息')
     .action((options) => { gitPush(options.message) })
-  
+
   program
     .command('taobao')
-    .description('打开淘宝源去同步') 
-    .action((options) => { openInBrowser('https://www.npmmirror.com/sync/lingman-pub')})
+    .description('打开淘宝源去同步')
+    .action((options) => { openInBrowser('https://www.npmmirror.com/sync/lingman-pub') })
 
   program.version(version, '-v, --version', '查看版本号')
 }
@@ -39,7 +39,7 @@ export function langDotnet(program, config) {
   program
     .command('sync')
     .description('同步远程数据库表结构到本地')
-    .action(() => { sync(config , program.args.slice(1)) })
+    .action(() => { sync(config, program.args.slice(1)) })
 
   program
     .command('build')
@@ -70,5 +70,4 @@ export function langDotnet(program, config) {
     runShell('dotnet tool update --global dotnet-ef')
   })
 }
- 
 

@@ -21,7 +21,7 @@ export async function sync(config, args: string[]) {
           choices: Object.keys(sync).map(i => ({ name: i, value: sync[i] })),
         },
       ])
-      command = sync[choose.type]
+      command = choose.type
     }
     else if (args[0] === 'all') {
       for (const key in sync) {

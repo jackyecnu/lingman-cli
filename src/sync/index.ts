@@ -42,5 +42,5 @@ export async function sync(config, args: string[]) {
   if (isWin)
     execSync(command, { stdio: 'inherit', shell: 'powershell.exe' })
   else
-    execSync(command)
+    execSync(command, { stdio: 'inherit' })
 }

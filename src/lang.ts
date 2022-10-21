@@ -24,7 +24,7 @@ export function langCommon(program) {
   program
     .command('taobao')
     .description('打开淘宝源去同步')
-    .action((options) => { openInBrowser('https://www.npmmirror.com/sync/lingman-pub') })
+    .action(() => { openInBrowser('https://www.npmmirror.com/sync/lingman-pub') })
 
   program.version(version, '-v, --version', '查看版本号')
 }

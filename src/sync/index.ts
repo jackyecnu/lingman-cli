@@ -1,7 +1,8 @@
 import { execSync } from 'child_process'
 import chalk from 'chalk'
+import inquirer from 'inquirer'
 
-export function sync(config, args: string[]) {
+export async function sync(config, args: string[]) {
   const sync = config.sync
   if (!sync) return console.log(chalk.red('缺少sync配置'))
 
@@ -12,9 +13,15 @@ export function sync(config, args: string[]) {
   else {
     if (args.length === 0) {
       console.log('\x1B[33m%s\x1B[0m', '请输入需要同步的数据库:全部为all')
-      for (const key in sync)
-        console.log(key)
-
+      const choose = await inquirer.prompt([
+        {
+          type: 'rawlist',
+          message: '请选择 ?',
+          name: 'type',
+          choices: Object.keys(sync).map(i => ({ name: i, value: sync[i] })),
+        },
+      ])
+      command = choose.type
       return
     }
     if (args[0] === 'all') {

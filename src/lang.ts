@@ -19,7 +19,9 @@ export function langCommon(program) {
     .command('git')
     .description('git提交 默认提交工作区所有文件')
     .option('-m, --message <message>', '提交信息')
-    .action((options) => { gitPush(options.message) })
+    .action((options) => {
+      gitPush(options.message, program.args.slice(1))
+    })
 
   program
     .command('taobao')

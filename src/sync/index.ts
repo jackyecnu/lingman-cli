@@ -1,6 +1,7 @@
 import { execSync } from 'child_process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
+import { runCmd } from 'src/runCmd'
 
 export async function sync(config, args: string[]) {
   const sync = config.sync
@@ -24,12 +25,8 @@ export async function sync(config, args: string[]) {
       command = choose.type
     }
     else if (args[0] === 'all') {
-      for (const key in sync) {
-        const isWin = process.platform === 'win32'
-        if (isWin)
-          execSync(sync[key], { stdio: 'inherit', shell: 'powershell.exe' })
-        else
-          execSync(sync[key])
+      for (const key in sync) { 
+        runCmd(sync[key]);  
       }
       return
     }
@@ -38,9 +35,5 @@ export async function sync(config, args: string[]) {
     }
   }
 
-  const isWin = process.platform === 'win32'
-  if (isWin)
-    execSync(command, { stdio: 'inherit', shell: 'powershell.exe' })
-  else
-    execSync(command, { stdio: 'inherit' })
+  runCmd(command) 
 }

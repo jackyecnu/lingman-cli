@@ -1,5 +1,6 @@
 import { execSync } from 'child_process'
 import chalk from 'chalk'
+import { runCmd } from 'src/runCmd'
 
 export function openDocs({ docs }) {
   if (!docs) return console.log(chalk.red('缺少docs配置'))
@@ -16,11 +17,8 @@ export function openLog({ log }) {
   openInBrowser(log)
 }
 
-export function openInBrowser(url) {
-  const isWin = process.platform === 'win32'
-  if (isWin)
-    execSync(`start '${url}'`, { stdio: 'inherit', shell: 'powershell.exe' })
-  else
-    execSync(`open '${url}'`)
+export function openInBrowser(url) { 
+  let cmd = process.platform === 'win32' ? `start '${url}'` : `open '${url}'`
+  runCmd(cmd); 
 }
 

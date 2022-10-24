@@ -4,7 +4,7 @@ import { createController } from "./co";
 import { gitPush } from "./git";
 import { initHelper } from "./init-helper";
 import { openDocs, openDocs1, openInBrowser, openLog } from "./open";
-import { runCmd } from "./runCmd";
+import { runCmd } from "./runcmd";
 import { sync } from "./sync";
 import { update } from "./update";
 import { runShell } from "./utils/runShell";

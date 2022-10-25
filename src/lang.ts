@@ -3,6 +3,7 @@ import { version } from '../package.json'
 import { build } from './build'
 import { createController } from './co'
 import { gitPush } from './git'
+import { init } from './init'
 import { initHelper } from './init-helper'
 import { openDocs, openDocs1, openInBrowser, openLog } from './open'
 import { runCmd } from './runcmd'
@@ -25,6 +26,13 @@ export function langCommon(program) {
     .option('-m, --message <message>', '提交信息')
     .action((options) => {
       gitPush(options.message, program.args.slice(1))
+    })
+
+  program
+    .command('init')
+    .description('自动创建lingman.config.js')
+    .action(() => {
+      init()
     })
 
   program

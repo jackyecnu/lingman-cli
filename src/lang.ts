@@ -59,6 +59,14 @@ export function langFlutter(program, config) {
     .action(() => {
       runCmd('flutter run')
     })
+
+  program
+    .command('lint')
+    .description('Flutter lint规则检测')
+    .action(() => {
+      runCmd('flutter pub run dart_code_metrics:metrics analyze lib')
+      runCmd('flutter analyze')
+    })
 }
 
 // .net 相关

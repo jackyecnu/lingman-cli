@@ -1,16 +1,12 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
     "removeComments": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "target": "es2017",
     "sourceMap": false,
     "outDir": "./bin",
-    "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
@@ -20,7 +16,7 @@
     "noFallthroughCasesInSwitch": false
   },
   "include": [
-    "src/**/*.ts",
+    "src",
     "index.d.ts",
     "index.ts"
   ]

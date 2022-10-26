@@ -213,7 +213,8 @@ export async function unipub(para, args: string[]) {
   }
 
   function wx() {
-    const json = fs.readFileSync('src/manifest.json').toString()
+    const filePath = join(process.cwd(), './src/manifest.json')
+    const json = fs.readFileSync(filePath).toString()
     const appid = JSON.parse(json.replace(/\/\*.+\*\//g, ''))['mp-weixin'].appid
     if (!appid) {
       axios.get(encodeURI(`${notifyUrl}/${para.projectName}小程序发布失败没有appId`))

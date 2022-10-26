@@ -50,6 +50,7 @@ export function langFlutter(program, config) {
     .command('get')
     .description('Flutter pub get简写')
     .action(() => {
+      runCmd('git config core.hooksPath .gitHooks')
       runCmd('flutter pub get')
     })
 

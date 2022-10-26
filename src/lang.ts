@@ -65,7 +65,7 @@ export function langFlutter(program, config) {
     .command('lint')
     .description('Flutter lint规则检测')
     .action(() => {
-      runCmd('flutter pub run dart_code_metrics:metrics analyze lib')
+      runCmd('flutter pub run dart_code_metrics:metrics analyze lib --reporter=checkstyle')
       runCmd('flutter analyze')
     })
 }

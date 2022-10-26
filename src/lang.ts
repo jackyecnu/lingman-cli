@@ -13,12 +13,18 @@ import { update } from './update'
 import { runShell } from './utils/runShell'
 
 // 公共
-export function langCommon(program) {
+export function langCommon(program, config) {
   program
     .command('update')
     .description('更新Api')
     .action(() => {
       update()
+    })
+
+  program.command('dir')
+    .description('显示json配置文件')
+    .action(() => {
+      console.dir(config)
     })
 
   program

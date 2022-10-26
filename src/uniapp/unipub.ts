@@ -30,6 +30,7 @@ export async function unipub(para, args: string[]) {
       },
     ])
     type = choose.type
+    location = 'cn'
   }
   else {
     type = args[0]

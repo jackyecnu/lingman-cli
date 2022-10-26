@@ -229,7 +229,7 @@ export async function unipub(para, args: string[]) {
         appid,
         type: 'miniProgram',
         projectPath: resolve(process.cwd(), 'dist/build/mp-weixin'),
-        privateKeyPath: resolve(process.cwd(), `scripts/private.${appid}.key`),
+        privateKeyPath: resolve(process.cwd(), `private.${appid}.key`),
         ignores: ['node_modules/**/*'],
       }),
       version: `1.0.${Math.floor(new Date().getTime() / 1000)}`,

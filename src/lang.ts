@@ -8,6 +8,7 @@ import { initHelper } from './init-helper'
 import { openDocs, openDocs1, openInBrowser, openLog } from './open'
 import { runCmd } from './runcmd'
 import { sync } from './sync'
+import { unipub } from './uniapp/unipub'
 import { update } from './update'
 import { runShell } from './utils/runShell'
 
@@ -45,6 +46,17 @@ export function langCommon(program) {
   program.version(version, '-v, --version', '查看版本号')
 }
 
+// uniapp
+export function langUniapp(program, config) {
+  program
+    .command('pub')
+    .description('发布uniapp的wgt和微信')
+    .action(() => {
+      unipub(config.pub, program.args.slice(1))
+    })
+}
+
+// flutter
 export function langFlutter(program, config) {
   program
     .command('get')

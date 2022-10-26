@@ -3,7 +3,7 @@ import path from 'path'
 import { Command } from 'commander'
 
 import { checkVersion } from './utils/checkVersion'
-import { langCommon, langDotnet, langFlutter } from './lang'
+import { langCommon, langDotnet, langFlutter, langUniapp } from './lang'
 
 const program = new Command()
 
@@ -20,6 +20,9 @@ export default async function () {
       break
     case 'flutter':
       langFlutter(program, config)
+      break
+    case 'uniapp':
+      langUniapp(program, config)
       break
   }
   langCommon(program)

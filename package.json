@@ -1,6 +1,6 @@
 {
   "name": "lingman-pub",
-  "version": "1.0.48",
+  "version": "1.0.49",
   "packageManager": "pnpm@7.3.0",
   "description": "",
   "author": "",
@@ -29,6 +29,7 @@
     "fs-extra": "^10.1.0",
     "inquirer": "8.2.4",
     "jschardet": "^3.0.0",
+    "miniprogram-ci": "^1.8.35",
     "single-line-log": "^1.1.2"
   },
   "devDependencies": {

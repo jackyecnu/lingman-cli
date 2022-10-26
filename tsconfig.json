@@ -16,7 +16,6 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "isolatedModules": true,
-    "noEmit": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
   },

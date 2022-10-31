@@ -13,7 +13,7 @@ export async function gitPush(message, args: string[]) {
     execSync('git push', { stdio: 'inherit' })
   }
   catch (err) {
-    console.log('output', err)
-    console.log('sdterr', err.stderr.toString())
+    console.log('output========', err)
+    // console.log('sdterr', err.stderr.toString())
   }
 }

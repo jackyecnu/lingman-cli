@@ -31,7 +31,9 @@ export function langCommon(program, config) {
     .description('git提交 默认提交工作区所有文件')
     .option('-m, --message <message>', '提交信息')
     .action((options) => {
-      gitPush(options.message, program.args.slice(1))
+      // console.log(options.message, 'aaaa', program.args.slice(1))
+      console.dir(options)
+      gitPush(options.message)
     })
 
   program

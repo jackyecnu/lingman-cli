@@ -92,28 +92,28 @@ export function langFlutter(program, config) {
     .command('ios')
     .description('打包ios应用')
     .action(() => {
-      runCmd(config['ios'])
+      gitPush('ios')
     })
 
   program
     .command('android')
     .description('打包android应用')
     .action(() => {
-      runCmd(config['android'])
+      gitPush('android')
     })
 
   program
     .command('release')
     .description('同时打包ios android应用')
     .action(() => {
-      runCmd(config['release'])
+      gitPush('release')
     })
 
   program
     .command('web')
     .description('打包web应用')
     .action(() => {
-      runCmd(config['web'])
+      gitPush('web')
     })
 }
 

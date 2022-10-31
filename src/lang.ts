@@ -33,7 +33,7 @@ export function langCommon(program, config) {
     .action((options) => {
       // console.log(options.message, 'aaaa1', program.args.slice(1))
       console.dir(options)
-      gitPush(options.message)
+      gitPush(options.message, program.args.slice(1))
     })
 
   program

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { version } from '../package.json'
 import { build } from './build'
 import { createController } from './co'
@@ -85,6 +84,34 @@ export function langFlutter(program, config) {
     .action(() => {
       runCmd('flutter pub run dart_code_metrics:metrics analyze lib --reporter=checkstyle')
       runCmd('flutter analyze')
+    })
+
+  program
+    .command('ios')
+    .description('打包ios应用')
+    .action(() => {
+      runCmd(config['ios'])
+    })
+
+  program
+    .command('android')
+    .description('打包android应用')
+    .action(() => {
+      runCmd(config['android'])
+    })
+
+  program
+    .command('release')
+    .description('同时打包ios android应用')
+    .action(() => {
+      runCmd(config['release'])
+    })
+
+  program
+    .command('web')
+    .description('打包web应用')
+    .action(() => {
+      runCmd(config['web'])
     })
 }
 

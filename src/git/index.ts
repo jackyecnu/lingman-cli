@@ -11,6 +11,7 @@ export async function gitPush(message, args: string[]) {
     else
       execSync(`git commit -m "${message || '提交'}"`, { stdio: 'inherit' })
     execSync('git push', { stdio: 'inherit' })
+    console.log('output========ss')
   }
   catch (err) {
     console.log('output========', err)

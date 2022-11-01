@@ -1,6 +1,7 @@
 import { version } from '../package.json'
 import { build } from './build'
 import { createController } from './co'
+import { changeForGit } from './common/changeForGit'
 import { gitPush } from './git'
 import { init } from './init'
 import { initHelper } from './init-helper'
@@ -48,6 +49,13 @@ export function langCommon(program, config) {
     .description('打开淘宝源去同步')
     .action(() => {
       openInBrowser('https://www.npmmirror.com/sync/lingman-pub')
+    })
+
+  program
+    .command('change')
+    .description('修改lingman.config.js,方便git提交')
+    .action(() => {
+      changeForGit()
     })
 
   program.version(version, '-v, --version', '查看版本号')
@@ -103,17 +111,17 @@ export function langFlutter(program, config) {
     })
 
   program
-    .command('release')
-    .description('同时打包ios android应用')
-    .action(() => {
-      gitPush('release')
-    })
-
-  program
     .command('web')
     .description('打包web应用')
     .action(() => {
       gitPush('web')
+    })
+
+  program
+    .command('release')
+    .description('同时打包ios android应用')
+    .action(() => {
+      gitPush('release')
     })
 }
 

@@ -85,7 +85,7 @@ export function langFlutter(program) {
     .command('lingman')
     .description('更新pub (新提交的需要约10分钟同步可用)')
     .action(() => {
-      runCmd('flutter pub upgrade flutter_lingman')
+      openInBrowser('https://pub.dev/packages/flutter_lingman')
     })
 
   program

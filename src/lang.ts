@@ -72,13 +72,19 @@ export function langUniapp(program, config) {
 }
 
 // flutter
-export function langFlutter(program, config) {
+export function langFlutter(program) {
   program
     .command('get')
     .description('Flutter pub get简写')
     .action(() => {
       runCmd('git config core.hooksPath .gitHooks')
       runCmd('flutter pub get')
+    })
+  program
+    .command('lingman')
+    .description('更新pub (新提交的需要约10分钟同步可用)')
+    .action(() => {
+      runCmd('flutter pub upgrade flutter_lingman')
     })
 
   program

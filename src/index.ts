@@ -19,7 +19,7 @@ export default async function () {
       langDotnet(program, config)
       break
     case 'flutter':
-      langFlutter(program, config)
+      langFlutter(program)
       break
     case 'uniapp':
       langUniapp(program, config)

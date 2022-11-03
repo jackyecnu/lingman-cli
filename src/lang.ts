@@ -80,6 +80,7 @@ export function langFlutter(program) {
       runCmd('git config core.hooksPath .gitHooks')
       runCmd('flutter pub get')
     })
+
   program
     .command('lingman')
     .description('更新pub (新提交的需要约10分钟同步可用)')

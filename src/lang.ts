@@ -17,7 +17,7 @@ import { runShell } from './utils/runShell'
 // 公共
 export function langCommon(program, config) {
   program
-    .command('update')
+    .command('u')
     .description('更新Api')
     .action(() => {
       update()

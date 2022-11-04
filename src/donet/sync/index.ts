@@ -4,7 +4,7 @@ import { runCmd } from '../../common/runcmd'
 
 export async function sync(config, args: string[]) {
   const sync = config.sync
-  if (!sync) return console.log(chalk.red('缺少sync配置'))
+  if (!sync) return console.log(chalk.bold.red('缺少sync配置'))
 
   let command = ''
   if (typeof sync === 'string') {

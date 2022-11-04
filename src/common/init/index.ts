@@ -14,7 +14,7 @@ export async function init() {
       console.log('该程序配置为：', config.lang)
   }
   else {
-    console.log(chalk.blue('请输入需要需要配置的语言：'))
+    console.log(chalk.bold.blue('请输入需要需要配置的语言：'))
     const arr = ['dotnet', 'flutter', 'uniapp']
     const choose = await inquirer.prompt([
       {

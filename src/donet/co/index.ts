@@ -4,9 +4,9 @@ import chalk from 'chalk'
 
 export function createController(config, args: string[]) {
   const { ApiPath, BLLPath, ModelPath } = config.co
-  if (!ApiPath) return console.log(chalk.red('缺少ApiPath配置'))
-  if (!BLLPath) return console.log(chalk.red('缺少BLLPath配置'))
-  if (!ModelPath) return console.log(chalk.red('缺少ModelPath配置'))
+  if (!ApiPath) return console.log(chalk.bold.red('缺少ApiPath配置'))
+  if (!BLLPath) return console.log(chalk.bold.red('缺少BLLPath配置'))
+  if (!ModelPath) return console.log(chalk.bold.red('缺少ModelPath配置'))
   if (args.length === 0) {
     console.log('\x1B[33m%s\x1B[0m', '需要传入Controller参数')
     return

@@ -3,7 +3,7 @@ import chalk from 'chalk'
 
 export async function gitPush(message, args: string[] = []) {
   // if (res.toString().includes('nothing to commit'))
-  //   console.log(`错误：${chalk.yellow('无更新')}`)
+  //   console.log(`错误：${chalk.bold.yellow('无更新')}`)
 
   try {
     execSync('git add .', { stdio: 'inherit' })
@@ -15,6 +15,6 @@ export async function gitPush(message, args: string[] = []) {
     execSync('git push', { stdio: 'inherit' })
   }
   catch (err) {
-    console.log(`${chalk.red('运行出错')}`)
+    console.log(`${chalk.bold.red('运行出错')}`)
   }
 }

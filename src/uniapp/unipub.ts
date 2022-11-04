@@ -16,7 +16,7 @@ export async function unipub(para, args: string[]) {
   let type = ''
   let location = ''
   if (args.length === 0) {
-    console.log(chalk.blue('请输入需要发布的版本'))
+    console.log(chalk.bold.blue('请输入需要发布的版本'))
     const arr = ['wx', 'wgt_dev', 'wgt_pro', 'wx_wgt_dev', 'wx_wgt_pro']
     const choose = await inquirer.prompt([
       {
@@ -56,7 +56,7 @@ export async function unipub(para, args: string[]) {
       wgt_pro()
       break
     default:
-      return console.log(chalk.red('缺少发布类型'))
+      return console.log(chalk.bold.red('缺少发布类型'))
   }
 
   function wgt_dev() {

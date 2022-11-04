@@ -16,9 +16,9 @@ export function changeForGit() {
       json = `${firstLine}${json}`
     }
     fs.writeFileSync(configPath, json, { encoding: 'utf-8' })
-    console.log(chalk.green('改变成功'))
+    console.log(chalk.bold.green('改变成功'))
   }
   else {
-    console.log(chalk.red('不存在 lingman.config.js， 无法提交'))
+    console.log(chalk.bold.red('不存在 lingman.config.js， 无法提交'))
   }
 }

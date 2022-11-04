@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import { runCmd } from '../common/runcmd'
 
 export async function updateLingmanVersion() {
-  const res = await axios.get('https://pub.dev/api/documentation/flutter_lingman')
+  const res = await axios.get('https://pub.flutter-io.cn/api/documentation/flutter_lingman')
   const { latestStableVersion } = res.data
 
   const pubspecPath = path.resolve(process.cwd(), 'pubspec.yaml')

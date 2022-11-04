@@ -12,12 +12,12 @@ export async function updateLingmanVersion() {
 
   const pubspec = fs.readFileSync(pubspecPath, 'utf-8')
 
-  const reg = /flutter_lingman:\s+\^(.*)[\r\n]+/
+  const reg = /flutter_lingman:\s+\^?(.*)[\r\n]+/
 
   const currentVersion = pubspec.match(reg)[1]
 
   if (latestStableVersion !== currentVersion) {
-    const newPubspec = pubspec.replace(reg, `flutter_lingman: ^${latestStableVersion}\r\n\r\n`)
+    const newPubspec = pubspec.replace(reg, `flutter_lingman: ${latestStableVersion}\r\n\r\n`)
     fs.writeFileSync(pubspecPath, newPubspec)
     runCmd('flutter pub get')
     console.log(chalk.bold.green('更新成功'))

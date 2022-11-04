@@ -1,5 +1,6 @@
 import { version } from '../package.json'
 import { changeForGit } from './common/changeForGit'
+import { checkOnlineAppVersion } from './common/checkOnlineAppVersion'
 import { gitPush } from './common/git'
 import { init } from './common/init'
 import { openInBrowser } from './common/open'
@@ -35,7 +36,7 @@ export function langCommon(program, config) {
     .option('-m, --message <message>', '提交信息')
     .action((options) => {
       // console.log(options.message, 'aaaa1', program.args.slice(1))
-      console.dir(options)
+      // console.dir(options)
       gitPush(options.message, program.args.slice(1))
     })
 
@@ -58,6 +59,13 @@ export function langCommon(program, config) {
     .description('修改lingman.config.js,方便git提交')
     .action(() => {
       changeForGit()
+    })
+
+  program
+    .command('v')
+    .description('查看当前线上App版本')
+    .action(() => {
+      checkOnlineAppVersion(config)
     })
 
   program.version(version, '-v, --version', '查看版本号')
@@ -193,3 +201,4 @@ export function langDotnet(program, config) {
       runShell('dotnet tool update --global dotnet-ef')
     })
 }
+

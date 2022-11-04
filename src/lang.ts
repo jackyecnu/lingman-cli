@@ -1,15 +1,17 @@
 import { version } from '../package.json'
-import { build } from './build'
-import { createController } from './co'
 import { changeForGit } from './common/changeForGit'
-import { gitPush } from './git'
-import { init } from './init'
-import { initHelper } from './init-helper'
-import { openDocs, openDocs1, openInBrowser, openLog } from './open'
-import { runCmd } from './runcmd'
-import { sync } from './sync'
+import { gitPush } from './common/git'
+import { init } from './common/init'
+import { openInBrowser } from './common/open'
+import { runCmd } from './common/runcmd'
+import { update } from './common/update'
+import { build } from './donet/build'
+import { createController } from './donet/co'
+import { initHelper } from './donet/init-helper'
+import { openDocs, openDocs1, openLog } from './donet/open'
+import { sync } from './donet/sync'
+import { updateLingmanVersion } from './flutter/lingman'
 import { unipub } from './uniapp/unipub'
-import { update } from './update'
 import { runShell } from './utils/runShell'
 
 // 公共
@@ -85,7 +87,8 @@ export function langFlutter(program) {
     .command('lingman')
     .description('更新pub (新提交的需要约10分钟同步可用)')
     .action(() => {
-      openInBrowser('https://pub.dev/packages/flutter_lingman')
+      updateLingmanVersion()
+      // openInBrowser('https://pub.dev/packages/flutter_lingman')
     })
 
   program

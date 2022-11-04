@@ -14,6 +14,15 @@ export async function updateLingmanVersion() {
 
   const reg = /flutter_lingman:\s+\^?(.*)[\r\n]+/
 
+  if (!reg.test(pubspec)) {
+    const newPubspec = pubspec.replace('dependencies:\r\n', `dependencies:\r\n  flutter_lingman: ${latestStableVersion}\r\n\r\n`)
+    fs.writeFileSync(pubspecPath, newPubspec)
+    runCmd('flutter pub get')
+    console.log(chalk.bold.green('更新成功'))
+
+    return
+  }
+
   const currentVersion = pubspec.match(reg)[1]
 
   if (latestStableVersion !== currentVersion) {

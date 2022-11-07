@@ -4,7 +4,7 @@ import FormData from 'form-data'
 import axios from 'axios'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { runCmd } from '../common/runcmd'
+import { runCmd } from '../../common/runcmd'
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ci = require('miniprogram-ci')

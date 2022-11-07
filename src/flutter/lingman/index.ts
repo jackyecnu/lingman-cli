@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import axios from 'axios'
 import chalk from 'chalk'
-import { runCmd } from '../common/runcmd'
+import { runCmd } from '../../common/runcmd'
 
 export async function updateLingmanVersion() {
   const res = await axios.get('https://pub.flutter-io.cn/api/documentation/flutter_lingman')

@@ -3,7 +3,10 @@ import path from 'path'
 import { Command } from 'commander'
 
 import { checkVersion } from './utils/checkVersion'
-import { langCommon, langDotnet, langFlutter, langUniapp } from './lang'
+import { langDotnet } from './donet'
+import { langFlutter } from './flutter'
+import { langUniapp } from './uniapp'
+import { langCommon } from './common'
 
 const program = new Command()
 

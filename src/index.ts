@@ -27,6 +27,9 @@ export default async function () {
     case 'uniapp':
       langUniapp(program, config)
       break
+    case 'java'
+      langJava(program, config)
+      break
   }
   langCommon(program, config)
   program.parse()

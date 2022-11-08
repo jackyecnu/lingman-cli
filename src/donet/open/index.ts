@@ -1,14 +1,14 @@
 import chalk from 'chalk'
 import { openInBrowser } from '../../common/open'
 
-export function openDocs({ docs }) {
-  if (!docs) return console.log(chalk.bold.red('缺少docs配置'))
-  openInBrowser(docs)
+export function openDocs({ api }) {
+  if (!api) return console.log(chalk.bold.red('缺少api配置'))
+  openInBrowser(api)
 }
 
-export function openDocs1({ docs1 }) {
-  if (!docs1) return console.log(chalk.bold.red('缺少docs1配置'))
-  openInBrowser(docs1)
+export function openDocs1({ api1 }) {
+  if (!api1) return console.log(chalk.bold.red('缺少api1配置'))
+  openInBrowser(api1)
 }
 
 export function openLog({ log }) {

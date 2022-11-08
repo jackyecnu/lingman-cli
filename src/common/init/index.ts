@@ -15,7 +15,7 @@ export async function init() {
   }
   else {
     console.log(chalk.bold.blue('请输入需要需要配置的语言：'))
-    const arr = ['dotnet', 'flutter', 'uniapp']
+    const arr = ['java', 'dotnet', 'flutter', 'uniapp']
     const choose = await inquirer.prompt([
       {
         type: 'rawlist',

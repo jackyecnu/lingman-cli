@@ -7,6 +7,7 @@ import { langDotnet } from './donet'
 import { langFlutter } from './flutter'
 import { langUniapp } from './uniapp'
 import { langCommon } from './common'
+import { langJava } from './java'
 
 const program = new Command()
 
@@ -27,7 +28,7 @@ export default async function () {
     case 'uniapp':
       langUniapp(program, config)
       break
-    case 'java'
+    case 'java':
       langJava(program, config)
       break
   }

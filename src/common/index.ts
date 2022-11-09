@@ -1,9 +1,11 @@
 import { version } from '../../package.json'
+import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
 import { checkOnlineAppVersion } from './checkOnlineAppVersion'
 import { gitPush } from './git'
 import { init } from './init'
 import { openInBrowser } from './open'
+import { runCmd } from './runcmd'
 import { update } from './update'
 
 export function langCommon(program, config) {
@@ -56,6 +58,16 @@ export function langCommon(program, config) {
     .description('查看当前线上App版本')
     .action(() => {
       checkOnlineAppVersion(config)
+    })
+
+  program
+    .command('.')
+    .description('打开当前文件夹')
+    .action(() => {
+      if (PlatformX.isWin)
+        runCmd('explorer .')
+      else
+        runCmd('open .')
     })
 
   program.version(version, '-v, --version', '查看版本号')

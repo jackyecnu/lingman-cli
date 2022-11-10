@@ -9,7 +9,7 @@ export async function updateLingmanVersionForJava() {
   const parser = new XMLParser()
   const json = parser.parse(data)
 
-  const latestStableVersion = json.metadata.versioning.latest
+  const releaseStableVersion = json.metadata.versioning.release
 
   const rootPath = process.cwd()
 
@@ -24,8 +24,8 @@ export async function updateLingmanVersionForJava() {
     if (reg.test(pom)) {
       const currentVersion = pom.match(reg)[1]
       const oldString = pom.match(reg)[0]
-      if (currentVersion !== latestStableVersion) {
-        const newPom = pom.replace(reg, oldString.replace(currentVersion, latestStableVersion))
+      if (currentVersion !== releaseStableVersion) {
+        const newPom = pom.replace(reg, oldString.replace(currentVersion, releaseStableVersion))
         fs.writeFileSync(pomFile, newPom)
         console.log(chalk.bold.green(`更新成功: ${pomFile}`))
       }

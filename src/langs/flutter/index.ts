@@ -1,6 +1,6 @@
 import { gitPush } from '../../common/git'
 import { runCmd } from '../../common/runcmd'
-import { updateLingmanVersion } from './lingman'
+import { updateLingmanVersionForFlutter } from './lingman'
 
 export function langFlutter(program) {
   program
@@ -15,7 +15,7 @@ export function langFlutter(program) {
     .command('lingman')
     .description('更新pub (新提交的需要约10分钟同步可用)')
     .action(() => {
-      updateLingmanVersion()
+      updateLingmanVersionForFlutter()
       // openInBrowser('https://pub.dev/packages/flutter_lingman')
     })
 

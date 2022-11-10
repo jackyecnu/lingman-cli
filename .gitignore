@@ -3,7 +3,6 @@ node_modules
 .DS_Store
 dist
 dist-ssr
-bin
 
 # local env files
 .env.local

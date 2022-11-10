@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { openInBrowser } from '../../common/open'
+import { openInBrowser } from '../../../common/open'
 
 export function openDocs({ api }) {
   if (!api) return console.log(chalk.bold.red('缺少api配置'))

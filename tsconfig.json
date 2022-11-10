@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "target": "es2017",
     "sourceMap": false,
-    "outDir": "./bin",
+    "outDir": "./dist",
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

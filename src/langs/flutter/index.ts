@@ -1,5 +1,5 @@
-import { gitPush } from '../common/git'
-import { runCmd } from '../common/runcmd'
+import { gitPush } from '../../common/git'
+import { runCmd } from '../../common/runcmd'
 import { updateLingmanVersion } from './lingman'
 
 export function langFlutter(program) {

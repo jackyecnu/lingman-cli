@@ -1,4 +1,4 @@
-import { runShell } from '../utils/runShell'
+import { runShell } from '../../utils/runShell'
 import { build } from './build'
 import { createController } from './co'
 import { initHelper } from './init-helper'

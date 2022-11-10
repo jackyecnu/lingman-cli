@@ -8,11 +8,11 @@
   "keywords": [],
   "main": "index.js",
   "bin": {
-    "lm": "./bin/index.js"
+    "lm": "bin/lm.js"
   },
   "files": [
     "bin",
-    "package.json"
+    "dist"
   ],
   "scripts": {
     "dev": "tsc && node ./bin/index.js",

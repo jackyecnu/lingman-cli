@@ -2,12 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import { Command } from 'commander'
 
-import { checkVersion } from './utils/checkVersion'
-import { langDotnet } from './donet'
-import { langFlutter } from './flutter'
-import { langUniapp } from './uniapp'
 import { langCommon } from './common'
-import { langJava } from './java'
+import { langs } from './shared'
+import { checkVersion } from './utils/checkVersion'
 
 const program = new Command()
 
@@ -18,21 +15,11 @@ let config = { lang: '', co: {}, initConfig: {} } as any
 if (fs.existsSync(configPath)) config = require(configPath)
 
 export default async function () {
-  switch (config.lang) {
-    case 'dotnet':
-      langDotnet(program, config)
-      break
-    case 'flutter':
-      langFlutter(program)
-      break
-    case 'uniapp':
-      langUniapp(program, config)
-      break
-    case 'java':
-      langJava(program, config)
-      break
-  }
+  langs[config.lang] && langs[config.lang](program, config)
+
   langCommon(program, config)
+
   program.parse()
+
   checkVersion()
 }

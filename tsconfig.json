@@ -17,7 +17,7 @@
     "strict": true,
     "isolatedModules": true,
     "noUnusedLocals": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": true
   },
   "include": [
     "src",

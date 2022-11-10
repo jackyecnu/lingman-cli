@@ -13,14 +13,14 @@ permissions:
 
 jobs:
   # packages =======================================================================================================================
-  lingman-web:
+  lingman-cli:
     if: contains(github.event.head_commit.message, 'release')
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node: [16.x]
-        name: [lingman-pub]
-        title: [lingman-pub]
+        name: [lingman-cli]
+        title: [lingman-cli]
       fail-fast: false
 
     steps:

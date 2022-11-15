@@ -67,7 +67,7 @@ export async function chooseMessage() {
 }
 
 export async function checkGitMessage(message) {
-  const reg = new RegExp(`^(${Object.values(messageTypes).join('|')})`)
+  const reg = new RegExp(`^(${Object.values(messageTypes).join('|')}|chore)`)
   if (!reg.test(message)) {
     console.log(chalk.bold.red('提交信息格式错误, 请按照规范提交'))
     process.exit(1)

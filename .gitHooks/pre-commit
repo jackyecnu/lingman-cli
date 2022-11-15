@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+lmc $1
+
+if [ $? -ne 0 ]; then
+    git stash pop -q
+    exit 1
+fi
+
+git stash pop -q
+exit 0

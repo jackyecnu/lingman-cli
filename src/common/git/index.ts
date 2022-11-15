@@ -1,6 +1,8 @@
 import { execSync } from 'child_process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
+import { runCmd } from '../runcmd'
+import { messageTypes } from '../../shared'
 
 export async function gitPush(message, args: string[] = []) {
   if (!message) {
@@ -22,6 +24,8 @@ export async function gitPush(message, args: string[] = []) {
 }
 
 export async function chooseMessage() {
+  runCmd('git config core.hooksPath .gitHooks')
+
   const res = execSync('git status', { stdio: 'pipe' }).toString().trim()
   const currentBranch = res.match(/On branch (.*)/)[1]
 
@@ -45,16 +49,11 @@ export async function chooseMessage() {
       type: 'rawlist',
       message: '请选择提交类型 ?',
       name: 'type',
-      choices: [
-        { name: '其他', value: '其他: ' },
-        { name: '功能', value: '功能: ' },
-        { name: '重构', value: '重构: ' },
-        { name: '发版', value: '发版: ' },
-      ],
+      choices: Object.keys(messageTypes).map(item => ({ name: item, value: messageTypes[item] })),
     },
   ])
 
-  if (choose.type === '发版: ') return gitPush(`${choose.type}release`)
+  if (choose.type === messageTypes['重构']) return gitPush(`${choose.type}release`)
 
   const message = await inquirer.prompt([
     {
@@ -65,4 +64,13 @@ export async function chooseMessage() {
   ])
 
   gitPush(choose.type + message.message)
+}
+
+export async function checkGitMessage(message) {
+  const reg = new RegExp(`^(${Object.values(messageTypes).join('|')})`)
+  if (!reg.test(message)) {
+    console.log(chalk.bold.red('提交信息格式错误, 请按照规范提交'))
+    process.exit(1)
+  }
+  process.exit(0)
 }

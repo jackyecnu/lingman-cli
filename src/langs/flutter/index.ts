@@ -1,4 +1,5 @@
 import { gitPush } from '../../common/git'
+import { openInBrowser } from '../../common/open'
 import { runCmd } from '../../common/runcmd'
 import { updateLingmanVersionForFlutter } from './lingman'
 
@@ -60,5 +61,12 @@ export function langFlutter(program) {
     .description('同时打包ios android应用')
     .action(() => {
       gitPush('release')
+    })
+
+  program
+    .command('icon')
+    .description('跳转到icon界面')
+    .action(() => {
+      openInBrowser('https://fonts.google.com/icons?selected=Material+Icons&icon.platform=flutter')
     })
 }

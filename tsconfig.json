@@ -16,7 +16,6 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "isolatedModules": true,
-    "noUnusedLocals": true,
     "noImplicitReturns": true
   },
   "include": [

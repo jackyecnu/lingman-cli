@@ -1,7 +1,27 @@
 import { execSync } from 'child_process'
 import chalk from 'chalk'
+import inquirer from 'inquirer'
 
 export async function gitPush(message, args: string[] = []) {
+  if (!message) {
+    console.log(chalk.bold.red('请输入提交信息'))
+    return
+  }
+  try {
+    execSync('git add .', { stdio: 'inherit' })
+
+    if (args[0] === 'no')
+      execSync('git commit -m "nobuild"', { stdio: 'inherit' })
+    else
+      execSync(`git commit -m "${message}"`, { stdio: 'inherit' })
+    execSync('git push', { stdio: 'inherit' })
+  }
+  catch (err) {
+    console.log(`${chalk.bold.red('运行出错')}`)
+  }
+}
+
+export async function chooseMessage() {
   const res = execSync('git status', { stdio: 'pipe' }).toString().trim()
   const currentBranch = res.match(/On branch (.*)/)[1]
 
@@ -20,16 +40,27 @@ export async function gitPush(message, args: string[] = []) {
     return
   }
 
-  try {
-    execSync('git add .', { stdio: 'inherit' })
+  const choose = await inquirer.prompt([
+    {
+      type: 'rawlist',
+      message: '请选择提交类型 ?',
+      name: 'type',
+      choices: [
+        { name: '其他', value: '其他: ' },
+        { name: '功能', value: '功能: ' },
+        { name: '重构', value: '重构: ' },
+        { name: '发版', value: '发版: ' },
+      ],
+    },
+  ])
 
-    if (args[0] === 'no')
-      execSync('git commit -m "nobuild"', { stdio: 'inherit' })
-    else
-      execSync(`git commit -m "${message || '提交'}"`, { stdio: 'inherit' })
-    execSync('git push', { stdio: 'inherit' })
-  }
-  catch (err) {
-    console.log(`${chalk.bold.red('运行出错')}`)
-  }
+  const message = await inquirer.prompt([
+    {
+      type: 'input',
+      message: '请输入提交信息 ?',
+      name: 'message',
+    },
+  ])
+
+  gitPush(choose.type + message.message)
 }

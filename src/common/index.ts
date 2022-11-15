@@ -2,7 +2,7 @@ import { version } from '../../package.json'
 import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
 import { checkOnlineAppVersion } from './checkOnlineAppVersion'
-import { gitPush } from './git'
+import { chooseMessage } from './git'
 import { init } from './init'
 import { openInBrowser } from './open'
 import { runCmd } from './runcmd'
@@ -25,11 +25,12 @@ export function langCommon(program, config) {
   program
     .command('git')
     .description('git提交 默认提交工作区所有文件')
-    .option('-m, --message <message>', '提交信息')
-    .action((options) => {
+    // .option('-m, --message <message>', '提交信息')
+    .action(() => {
       // console.log(options.message, 'aaaa1', program.args.slice(1))
       // console.dir(options)
-      gitPush(options.message, program.args.slice(1))
+      // gitPush(options.message, options.message ? program.args.slice(1) : program.args)
+      chooseMessage()
     })
 
   program

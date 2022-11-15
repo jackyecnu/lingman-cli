@@ -54,6 +54,8 @@ export async function chooseMessage() {
     },
   ])
 
+  if (choose.type === '发版: ') return gitPush(`${choose.type}release`)
+
   const message = await inquirer.prompt([
     {
       type: 'input',

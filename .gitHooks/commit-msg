@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-
-lmc $1
-
+message=$(cat $1)
+lmc $message
 if [ $? -ne 0 ]; then
     git stash pop -q
     exit 1

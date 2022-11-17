@@ -24,26 +24,7 @@ export async function gitPush(message, args: string[] = []) {
 }
 
 export async function chooseMessage() {
-  runCmd('git config core.hooksPath .gitHooks')
-
-  const res = execSync('git status', { stdio: 'pipe' }).toString().trim()
-  const currentBranch = res.match(/On branch (.*)/)[1]
-
-  const isPull = res.match(/Your branch is behind '.*' by (\d+) commit/) || [0, 0]
-  const isPush = res.match(/Your branch is ahead of '.*' by (\d+) commit/) || [0, 0]
-  const pullCountNum = +isPull[1]
-  const pushCountNum = +isPush[1]
-
-  if (isPull[0] && pullCountNum > 0) {
-    console.log(`当前分支 ${chalk.bold.yellow(currentBranch)} 距离远程分支 ${chalk.bold.yellow(currentBranch)} 有 ${chalk.bold.yellow(pullCountNum)} 个拉取, 请先执行 ${chalk.bold.yellow('git pull')}`)
-    return
-  }
-
-  if (isPush[0] && pushCountNum > 0) {
-    console.log(`当前分支 ${chalk.bold.yellow(currentBranch)} 距离远程分支 ${chalk.bold.yellow(currentBranch)} 有 ${chalk.bold.yellow(pushCountNum)} 个提交, 请先执行 ${chalk.bold.yellow('git push')}`)
-    return
-  }
-
+  checkGitStats()
   const choose = await inquirer.prompt([
     {
       type: 'rawlist',
@@ -53,7 +34,7 @@ export async function chooseMessage() {
     },
   ])
 
-  if (choose.type === messageTypes['重构']) return gitPush(`${choose.type}release`)
+  if (choose.type === messageTypes['发版']) return gitPush(`${choose.type}release`)
 
   const message = await inquirer.prompt([
     {
@@ -73,4 +54,31 @@ export async function checkGitMessage(message) {
     process.exit(1)
   }
   process.exit(0)
+}
+
+export async function checkGitStats() {
+  runCmd('git config core.hooksPath .gitHooks')
+
+  runCmd('git fetch')
+
+  const res = execSync('git status', { stdio: 'pipe' }).toString().trim()
+  const currentBranch = res.match(/On branch (.*)/)[1]
+
+  const isPull = res.match(/Your branch is behind '.*' by (\d+) commit/) || [0, 0]
+  const isPush = res.match(/Your branch is ahead of '.*' by (\d+) commit/) || [0, 0]
+  const pullCountNum = +isPull[1]
+  const pushCountNum = +isPush[1]
+
+  if (isPull[0] && pullCountNum > 0) {
+    console.log(`当前分支 ${chalk.bold.yellow(currentBranch)} 距离远程分支 ${chalk.bold.yellow(currentBranch)} 有 ${chalk.bold.yellow(pullCountNum)} 个拉取, 请先执行 ${chalk.bold.yellow('git pull')}`)
+    return
+  }
+
+  if (isPush[0] && pushCountNum > 0)
+    console.log(`当前分支 ${chalk.bold.yellow(currentBranch)} 距离远程分支 ${chalk.bold.yellow(currentBranch)} 有 ${chalk.bold.yellow(pushCountNum)} 个提交, 请先执行 ${chalk.bold.yellow('git push')}`)
+}
+
+export function gitPushAll(message) {
+  checkGitStats()
+  gitPush(message)
 }

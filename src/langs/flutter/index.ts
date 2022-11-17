@@ -1,6 +1,7 @@
-import { gitPush } from '../../common/git'
+import { gitPushAll } from '../../common/git'
 import { openInBrowser } from '../../common/open'
 import { runCmd } from '../../common/runcmd'
+import { messageTypes } from './../../shared/index'
 import { updateLingmanVersionForFlutter } from './lingman'
 
 export function langFlutter(program) {
@@ -39,28 +40,28 @@ export function langFlutter(program) {
     .command('ios')
     .description('打包ios应用')
     .action(() => {
-      gitPush('ios')
+      gitPushAll(`${messageTypes['发版']}ios`)
     })
 
   program
     .command('android')
     .description('打包android应用')
     .action(() => {
-      gitPush('android')
+      gitPushAll(`${messageTypes['发版']}android`)
     })
 
   program
     .command('web')
     .description('打包web应用')
     .action(() => {
-      gitPush('web')
+      gitPushAll(`${messageTypes['发版']}web`)
     })
 
   program
     .command('release')
     .description('同时打包ios android应用')
     .action(() => {
-      gitPush('release')
+      gitPushAll(`${messageTypes['发版']}release`)
     })
 
   program

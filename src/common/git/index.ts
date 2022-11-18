@@ -57,7 +57,7 @@ export async function checkGitMessage(message) {
   process.exit(0)
 }
 
-export async function checkGitStats() {
+export function checkGitStats() {
   runCmd('git config core.hooksPath .gitHooks')
 
   runCmd('git fetch')

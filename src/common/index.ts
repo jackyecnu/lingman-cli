@@ -2,7 +2,7 @@ import { version } from '../../package.json'
 import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
 import { checkOnlineAppVersion } from './checkOnlineAppVersion'
-import { chooseMessage } from './git'
+import { chooseMessage, openGitRepoByBrowser } from './git'
 import { init } from './init'
 import { openInBrowser } from './open'
 import { runCmd } from './runcmd'
@@ -69,6 +69,13 @@ export function langCommon(program, config) {
         runCmd('explorer .')
       else
         runCmd('open .')
+    })
+
+  program
+    .command('repo')
+    .description('打开当前git仓库')
+    .action(() => {
+      openGitRepoByBrowser()
     })
 
   program.version(version, '-v, --version', '查看版本号')

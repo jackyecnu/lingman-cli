@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { runCmd } from '../runcmd'
 import { messageTypes } from '../../shared'
+import { openInBrowser } from '../open'
 
 export async function gitPush(message, args: string[] = []) {
   if (!message) {
@@ -21,6 +22,13 @@ export async function gitPush(message, args: string[] = []) {
   catch (err) {
     console.log(`${chalk.bold.red('运行出错')}`)
   }
+}
+
+export function openGitRepoByBrowser() {
+  const res = execSync('git remote -v', { stdio: 'pipe' }).toString().trim()
+  const url = res.match(/origin\s+(.*)\s+\(fetch\)/)[1]
+  if (url)
+    openInBrowser(url)
 }
 
 export async function chooseMessage() {

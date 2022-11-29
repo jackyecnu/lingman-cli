@@ -1,10 +1,12 @@
 import { join, resolve } from 'path'
 import fs from 'fs-extra'
-import FormData from 'form-data'
 import axios from 'axios'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { runCmd } from '../../../common/runcmd'
+// import FormData from 'form-data'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const FormData = require('form-data')
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ci = require('miniprogram-ci')

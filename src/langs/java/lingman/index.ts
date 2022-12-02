@@ -19,7 +19,7 @@ export async function updateLingmanVersionForJava() {
   for (const pomFile of pomFiles) {
     const pom = fs.readFileSync(pomFile, 'utf-8')
 
-    const reg = /<groupId>com.lingman<\/groupId>\s+<artifactId>tool<\/artifactId>\s+<version>(.*)<\/version>/
+    const reg = /<groupId>com.lingman<\/groupId>\s+<artifactId>common<\/artifactId>\s+<version>(.*)<\/version>/
 
     if (reg.test(pom)) {
       const currentVersion = pom.match(reg)[1]

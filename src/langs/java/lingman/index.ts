@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
 
 export async function updateLingmanVersionForJava() {
-  const { data } = await axios.get('http://git.lingman.tech:8081/repository/maven-releases/com/lingman/tool/maven-metadata.xml')
+  const { data } = await axios.get('http://git.lingman.tech:8081/repository/maven-releases/com/lingman/common/maven-metadata.xml')
 
   const parser = new XMLParser()
   const json = parser.parse(data)

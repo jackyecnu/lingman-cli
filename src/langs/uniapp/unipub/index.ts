@@ -294,7 +294,7 @@ export async function unipub(para, args: string[]) {
       throw new Error('请填写appid')
     }
     const desc = '提交'
-    runCmd('pnpm build:mp-weixin')
+    runCmd('npm build:mp-weixin')
     ci.upload({
       project: new ci.Project({
         appid,

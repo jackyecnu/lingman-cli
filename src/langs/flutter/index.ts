@@ -5,7 +5,7 @@ import { messageTypes } from './../../shared/index'
 import { updateLingmanVersionForFlutter } from './lingman'
 import { updateBuildVersion } from './update'
 
-export function langFlutter(program) {
+export function langFlutter(program, config) {
   program
     .command('get')
     .description('Flutter pub get简写')
@@ -26,7 +26,7 @@ export function langFlutter(program) {
     .command('build1')
     .description('更新build版本号')
     .action(() => {
-      updateBuildVersion()
+      updateBuildVersion(config.url)
     })
 
   program

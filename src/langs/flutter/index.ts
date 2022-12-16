@@ -26,7 +26,7 @@ export function langFlutter(program, config) {
     .command('build1')
     .description('更新build版本号')
     .action(() => {
-      updateBuildVersion(config.url)
+      updateBuildVersion(config.build1)
     })
 
   program

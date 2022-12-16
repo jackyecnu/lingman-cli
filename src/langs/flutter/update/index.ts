@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export async function updateBuildVersion(url) {
   const res = await axios.get(url)
-  const { data } = res
+  const { data } = res.data
 
   const pubspecPath = path.resolve(process.cwd(), 'pubspec.yaml')
 

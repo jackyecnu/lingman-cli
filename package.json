@@ -1,6 +1,6 @@
 {
-  "name": "lingman-pub",
-  "version": "1.0.102",
+  "name": "lingman-cli",
+  "version": "0.0.0",
   "packageManager": "pnpm@7.3.0",
   "description": "",
   "author": "",

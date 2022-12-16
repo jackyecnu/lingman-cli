@@ -44,7 +44,7 @@ export function langCommon(program, config) {
     .command('taobao')
     .description('打开淘宝源去同步')
     .action(() => {
-      openInBrowser('https://www.npmmirror.com/sync/lingman-pub')
+      openInBrowser('https://www.npmmirror.com/sync/lingman-cli')
     })
 
   program

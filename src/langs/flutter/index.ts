@@ -3,6 +3,7 @@ import { openInBrowser } from '../../common/open'
 import { runCmd } from '../../common/runcmd'
 import { messageTypes } from './../../shared/index'
 import { updateLingmanVersionForFlutter } from './lingman'
+import { updateBuildVersion } from './update'
 
 export function langFlutter(program) {
   program
@@ -19,6 +20,13 @@ export function langFlutter(program) {
     .action(() => {
       updateLingmanVersionForFlutter()
       // openInBrowser('https://pub.dev/packages/flutter_lingman')
+    })
+
+  program
+    .command('build1')
+    .description('更新build版本号')
+    .action(() => {
+      updateBuildVersion()
     })
 
   program

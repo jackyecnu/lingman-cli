@@ -6,7 +6,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-npx.cmd lint-staged --concurrent false
-
-git stash pop -q
-exit 0
+npx lint-staged --concurrent false

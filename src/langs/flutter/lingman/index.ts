@@ -6,7 +6,9 @@ import { runCmd } from '../../../common/runcmd'
 
 export async function updateLingmanVersionForFlutter() {
   const res = await axios.get('https://api-lmapp.lingman.tech/api/Public/flutter_lingman')
-  const { latestStableVersion } = res.data
+  // const { latestStableVersion } = res.data
+  const latestStableVersion = res.data.latestStableVersion
+  console.log(res.data)
   console.log(chalk.bold.yellow(`最新版本: ${latestStableVersion}`))
 
   const pubspecPath = path.resolve(process.cwd(), 'pubspec.yaml')

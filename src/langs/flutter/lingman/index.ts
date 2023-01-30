@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import { runCmd } from '../../../common/runcmd'
 
 export async function updateLingmanVersionForFlutter() {
-  const res = await axios.get('https://pub.flutter-io.cn/api/documentation/flutter_lingman')
+  const res = await axios.get('https://api-lmapp.lingman.tech/api/Public/flutter_lingman')
   const { latestStableVersion } = res.data
   console.log(chalk.bold.yellow(`最新版本: ${latestStableVersion}`))
 

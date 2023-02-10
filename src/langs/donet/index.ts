@@ -2,7 +2,7 @@ import { runShell } from '../../utils/runShell'
 import { build } from './build'
 import { createController } from './co'
 import { initHelper } from './init-helper'
-import { openDocs, openDocs1, openLog } from './open'
+import { openDocs, openLog } from './open'
 import { sync } from './sync'
 
 export function langDotnet(program, config) {
@@ -39,13 +39,6 @@ export function langDotnet(program, config) {
     .description('打开本地Api文档')
     .action(() => {
       openDocs(config)
-    })
-
-  program
-    .command('api1')
-    .description('打开在线Api文档')
-    .action(() => {
-      openDocs1(config)
     })
 
   program

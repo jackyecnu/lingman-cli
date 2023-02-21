@@ -5,7 +5,7 @@ import { checkOnlineAppVersion } from './checkOnlineAppVersion'
 import { chooseMessage, openGitRepoByBrowser } from './git'
 import { init } from './init'
 import { openInBrowser } from './open'
-import { runCmd } from './runcmd'
+import { getCommand, runCmd } from './runcmd'
 import { update } from './update'
 
 export function langCommon(program, config) {
@@ -76,6 +76,13 @@ export function langCommon(program, config) {
     .description('打开当前git仓库')
     .action(() => {
       openGitRepoByBrowser()
+    })
+
+  program
+    .command('cmd')
+    .description('运行命令')
+    .action(() => {
+      getCommand()
     })
 
   program.version(version, '-v, --version', '查看版本号')

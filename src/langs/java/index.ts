@@ -13,7 +13,7 @@ export function langJava(program, config) {
     .command('api')
     .description('打开本地Api文档')
     .action(() => {
-      openDocs(config)
+      openDocs(config, program.args.slice(1))
     })
 
   program

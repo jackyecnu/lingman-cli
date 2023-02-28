@@ -1,14 +1,12 @@
 import fs from 'fs'
+import path from 'path'
 
-export async function updateDotnetBuildVersion(path) {
-  const pubspecPath = path.resolve(process.cwd(), path)
+export async function updateDotnetBuildVersion(buildPath) {
+  const pubspecPath = path.resolve(process.cwd(), buildPath)
 
   const pubspec = fs.readFileSync(pubspecPath, 'utf-8')
 
-  const reg = /<Version>\d+\.\d+\.\d+<\/Version>/
-  // const lastVersion = `${Math.floor(new Date().getTime() / 1000)}`
-  fs.writeFileSync(pubspecPath, pubspec.replace(reg, (match) => {
-    // if (!build) return `${match}+${data}`
-    return match.replace(/\d+$/, '')
-  }))
+  const reg = /<Version>(\d+)\.(\d+)\.(\d+)<\/Version>/
+  const lastVersion = `${Math.floor(new Date().getTime() / 1000)}`
+  fs.writeFileSync(pubspecPath, pubspec.replace(reg, `<Version>$1.$2.${lastVersion}</Version>`))
 }

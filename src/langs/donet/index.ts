@@ -1,5 +1,6 @@
 import { runShell } from '../../utils/runShell'
 import { build } from './build'
+import { updateDotnetBuildVersion } from './build-version'
 import { createController } from './co'
 import { initHelper } from './init-helper'
 import { openDocs, openLog } from './open'
@@ -53,6 +54,13 @@ export function langDotnet(program, config) {
     .description('ef tool 版本更新')
     .action(() => {
       runShell('dotnet tool update --global dotnet-ef')
+    })
+
+  program
+    .command('build-date')
+    .description('更新末尾版本号为时间戳')
+    .action(() => {
+      updateDotnetBuildVersion(config.buildPath)
     })
 }
 

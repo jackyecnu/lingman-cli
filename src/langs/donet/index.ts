@@ -57,10 +57,10 @@ export function langDotnet(program, config) {
     })
 
   program
-    .command('build-date')
+    .command('build1')
     .description('更新末尾版本号为时间戳')
     .action(() => {
-      updateDotnetBuildVersion(config.buildPath)
+      updateDotnetBuildVersion(config.build1)
     })
 }
 

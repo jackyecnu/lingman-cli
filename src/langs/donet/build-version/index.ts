@@ -1,12 +1,15 @@
 import fs from 'fs'
 import path from 'path'
+import axios from 'axios'
 
-export async function updateDotnetBuildVersion(buildPath) {
-  const pubspecPath = path.resolve(process.cwd(), buildPath)
+export async function updateDotnetBuildVersion(build1) {
+  const res = await axios.get(build1.url)
 
-  const pubspec = fs.readFileSync(pubspecPath, 'utf-8')
+  const targetPath = path.resolve(process.cwd(), build1.path)
+
+  const content = fs.readFileSync(targetPath, 'utf-8')
 
   const reg = /<Version>(\d+)\.(\d+)\.(\d+)<\/Version>/
-  const lastVersion = `${Math.floor(new Date().getTime() / 1000)}`
-  fs.writeFileSync(pubspecPath, pubspec.replace(reg, `<Version>$1.$2.${lastVersion}</Version>`))
+
+  fs.writeFileSync(targetPath, content.replace(reg, `<Version>$1.$2.${res.data.data}</Version>`))
 }

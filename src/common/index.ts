@@ -7,6 +7,7 @@ import { init } from './init'
 import { openInBrowser } from './open'
 import { getCommand, runCmd } from './runcmd'
 import { update } from './update'
+import { login, logout, me } from './user'
 
 export function langCommon(program, config) {
   program
@@ -83,6 +84,27 @@ export function langCommon(program, config) {
     .description('运行命令')
     .action(() => {
       getCommand()
+    })
+
+  program
+    .command('login')
+    .description('登录')
+    .action(() => {
+      login()
+    })
+
+  program
+    .command('logout')
+    .description('退出登录')
+    .action(() => {
+      logout()
+    })
+
+  program
+    .command('me')
+    .description('查看当前用户')
+    .action(() => {
+      me()
     })
 
   program.version(version, '-v, --version', '查看版本号')

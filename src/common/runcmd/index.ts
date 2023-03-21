@@ -2,6 +2,7 @@ import { execSync } from 'child_process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import axios from 'axios'
+import { checkLogin } from '../../utils/user'
 
 export async function runCmd(cmd, win = 'powershell') {
   if (!cmd) return console.log(chalk.bold.red('缺少指令配置'))
@@ -17,6 +18,7 @@ export async function runCmd(cmd, win = 'powershell') {
 }
 
 export async function getCommand() {
+  await checkLogin()
   const res = await axios.get(`https://api-lmapp.lingman.tech/api/app/devtool/command/all/${process.platform}`)
 
   const choose = await inquirer.prompt([

@@ -16,7 +16,7 @@ export async function login() {
       name: 'password',
     },
   ]).then(async (answers) => {
-    const res = await axios.post('https://git.lingman.tech:1235/api/account/login', answers)
+    const res = await axios.post('https://api.lingman.tech/api/account/login_account', answers)
     if (res.data.code === 1) {
       saveToken(res.data.data)
       console.log(chalk.green.bold('登录成功'))

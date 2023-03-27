@@ -45,7 +45,7 @@ export async function checkLogin() {
         process.exit(1)
       }
       else {
-        axios.get('https://git.lingman.tech:1235/api/account/info', { headers: { token } }).then((res) => {
+        axios.get('https://api.lingman.tech/api/account/info', { headers: { token } }).then((res) => {
           if (res.data.code === 1) {
             saveUser(JSON.stringify(res.data.data))
             resolve(res.data.data)

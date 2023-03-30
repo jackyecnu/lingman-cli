@@ -12,6 +12,9 @@ export function saveToken(token: string): string {
 }
 
 export function getToken(): string {
+  if (!fs.existsSync(tokenPath))
+    return ''
+
   return fs.readFileSync(tokenPath, 'utf-8')
 }
 

@@ -1,10 +1,14 @@
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
 import chalk from 'chalk'
 import axios from 'axios'
 
-const tokenPath = path.resolve(__dirname, './token.txt')
-const userPath = path.resolve(__dirname, './user.json')
+if (!fs.existsSync(path.resolve(os.homedir(), './.lingman')))
+  fs.mkdirSync(path.resolve(os.homedir(), './.lingman'))
+
+const tokenPath = path.resolve(os.homedir(), './.lingman/token.txt')
+const userPath = path.resolve(os.homedir(), './.lingman/user.json')
 
 export function saveToken(token: string): string {
   fs.writeFileSync(tokenPath, token)

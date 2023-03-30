@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import { checkLogin } from '../../../utils/user'
 
 export async function updateBuildVersion(project: string, args: string[]) {
-  if (args.length !== 0) {
+  if (args.length !== 1) {
     console.log(chalk.bold.red('传入参数有问题'))
     process.exit(1)
   }

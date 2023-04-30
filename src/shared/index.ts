@@ -1,6 +1,7 @@
 import { langDotnet } from '../langs/donet'
 import { langFlutter } from '../langs/flutter'
 import { langJava } from '../langs/java'
+import { langNodejs } from '../langs/nodejs'
 import { langUniapp } from '../langs/uniapp'
 
 export const langs = {
@@ -8,6 +9,7 @@ export const langs = {
   dotnet: langDotnet,
   flutter: langFlutter,
   uniapp: langUniapp,
+  nodejs: langNodejs,
 }
 
 export const messageTypes = {

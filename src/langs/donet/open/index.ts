@@ -49,4 +49,3 @@ export function openLog({ log }) {
   if (!log) return console.log(chalk.bold.red('缺少log地址配置'))
   openInBrowser(log)
 }
-

@@ -1,5 +1,5 @@
 /* eslint-disable no-extend-native */
-import fs from 'fs'
+import fs from 'node:fs'
 import chalk from 'chalk'
 
 export function createController(config, args: string[]) {

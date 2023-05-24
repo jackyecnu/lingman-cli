@@ -1,5 +1,5 @@
-import path from 'path'
-import fs from 'fs'
+import path from 'node:path'
+import fs from 'node:fs'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { langs } from '../../shared'

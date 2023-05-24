@@ -1,4 +1,5 @@
 import { openDocs } from '../donet/open'
+import { clear } from './clear'
 
 export function langNodejs(program, config) {
   program
@@ -6,5 +7,12 @@ export function langNodejs(program, config) {
     .description('打开本地Api文档')
     .action(() => {
       openDocs(config, program.args.slice(1))
+    })
+
+  program
+    .command('clear')
+    .description('清除package依赖和产物')
+    .action(() => {
+      clear()
     })
 }

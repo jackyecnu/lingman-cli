@@ -18,7 +18,7 @@ export async function runCmd(cmd, win = 'powershell') {
 }
 
 export async function getCommand() {
-  await checkLogin()
+  //await checkLogin()
   const res = await axios.get(`https://api-lmapp.lingman.tech/api/app/devtool/command/all/${process.platform}`)
 
   const choose = await inquirer.prompt([

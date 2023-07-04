@@ -1,3 +1,4 @@
+import type { Command } from 'commander'
 import { gitPushAll } from '../../common/git'
 import { openInBrowser } from '../../common/open'
 import { runCmd } from '../../common/runcmd'
@@ -5,7 +6,7 @@ import { messageTypes } from './../../shared/index'
 import { updateLingmanVersionForFlutter } from './lingman'
 import { updateBuildVersion } from './update'
 
-export function langFlutter(program, config) {
+export function langFlutter(program: Command, config) {
   program
     .command('get')
     .description('Flutter pub get简写')

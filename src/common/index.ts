@@ -1,3 +1,4 @@
+import type { Command } from 'commander'
 import { version } from '../../package.json'
 import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
@@ -9,7 +10,7 @@ import { getCommand, runCmd } from './runcmd'
 import { update } from './update'
 import { login, logout, me } from './user'
 
-export function langCommon(program, config) {
+export function langCommon(program: Command, config) {
   program
     .command('u')
     .description('更新Api')

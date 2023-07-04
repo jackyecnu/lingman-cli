@@ -1,7 +1,8 @@
-import { runCmd } from '../../common/runcmd'
+import type { Command } from 'commander'
 import { openDocs } from '../donet/open'
+import { runCmd } from '../../common/runcmd'
 
-export function langFastApi(program, config) {
+export function langFastApi(program: Command, config) {
   program
     .command('api')
     .description('打开本地Api文档')
@@ -12,7 +13,8 @@ export function langFastApi(program, config) {
   program
     .command('dev')
     .description('运行fastapi项目')
+    .allowUnknownOption()
     .action(() => {
-      runCmd(`uvicorn main:app --reload --port ${config?.port || 8000}`)
+      runCmd(`uvicorn main:app --reload --port ${config?.port || 8000} ${program.args.slice(1).join(' ')}`)
     })
 }

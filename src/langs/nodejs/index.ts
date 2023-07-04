@@ -1,7 +1,8 @@
+import type { Command } from 'commander'
 import { openDocs } from '../donet/open'
 import { clear } from './clear'
 
-export function langNodejs(program, config) {
+export function langNodejs(program: Command, config) {
   program
     .command('api')
     .description('打开本地Api文档')

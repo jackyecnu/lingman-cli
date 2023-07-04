@@ -1,3 +1,4 @@
+import type { Command } from 'commander'
 import { runShell } from '../../utils/runShell'
 import { build } from './build'
 import { updateDotnetBuildVersion } from './build-version'
@@ -6,7 +7,7 @@ import { initHelper } from './init-helper'
 import { openDocs, openLog } from './open'
 import { sync } from './sync'
 
-export function langDotnet(program, config) {
+export function langDotnet(program: Command, config) {
   program
     .command('co')
     .description('创建Controller , 文件目录以.分割')

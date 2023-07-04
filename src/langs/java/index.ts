@@ -1,7 +1,8 @@
+import type { Command } from 'commander'
 import { openDocs, openDocs1 } from '../donet/open'
 import { updateLingmanVersionForJava } from './lingman'
 
-export function langJava(program, config) {
+export function langJava(program: Command, config) {
   program
     .command('lingman')
     .description('更新lingman-java版本')

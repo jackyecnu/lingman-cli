@@ -1,4 +1,5 @@
 import { langDotnet } from '../langs/donet'
+import { langFastApi } from '../langs/fastapi'
 import { langFlutter } from '../langs/flutter'
 import { langJava } from '../langs/java'
 import { langNodejs } from '../langs/nodejs'
@@ -10,6 +11,7 @@ export const langs = {
   flutter: langFlutter,
   uniapp: langUniapp,
   nodejs: langNodejs,
+  fastapi: langFastApi,
 }
 
 export const messageTypes = {

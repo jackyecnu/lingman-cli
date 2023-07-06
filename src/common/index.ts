@@ -1,4 +1,5 @@
 import type { Command } from 'commander'
+import chalk from 'chalk'
 import { version } from '../../package.json'
 import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
@@ -109,4 +110,24 @@ export function langCommon(program: Command, config) {
     })
 
   program.version(version, '-v, --version', '查看版本号')
+}
+
+export function registerScripts(program: Command, config) {
+  const scripts = config.scripts || {}
+
+  // 检查是否有重复的命令
+  const commands = program.commands.map(item => item.name())
+  if (Object.keys(scripts).some(key => commands.includes(key))) {
+    console.error(chalk.yellow('错误：') + chalk.red('scripts 不能和 lm 内置命令重复'))
+    process.exit(0)
+  }
+
+  Object.keys(scripts).forEach((key) => {
+    program
+      .command(key)
+      .description(scripts[key])
+      .action(() => {
+        runCmd(scripts[key])
+      })
+  })
 }

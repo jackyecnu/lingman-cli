@@ -3,7 +3,7 @@ import path from 'node:path'
 import { Command } from 'commander'
 
 import axios from 'axios'
-import { langCommon } from './common'
+import { langCommon, registerScripts } from './common'
 import { langs } from './shared'
 import { checkVersion } from './utils/checkVersion'
 import { getToken } from './utils/user'
@@ -28,6 +28,8 @@ export default async function () {
   langs[config.lang] && langs[config.lang](program, config)
 
   langCommon(program, config)
+
+  registerScripts(program, config)
 
   program.parse()
 

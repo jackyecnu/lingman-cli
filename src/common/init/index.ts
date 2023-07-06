@@ -2,7 +2,7 @@ import path from 'node:path'
 import fs from 'node:fs'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { langs } from '../../shared'
+import { initConfigTemplate, langs } from '../../shared'
 
 export async function init() {
   const configPath = path.resolve(process.cwd(), 'lingman.config.js')
@@ -21,11 +21,7 @@ export async function init() {
         name: 'type',
         choices: Object.keys(langs).map(i => ({
           name: i,
-          value: `
-module.exports = {
-  lang: '${i}',
-}
-`.trim(),
+          value: initConfigTemplate[i],
         })),
       },
     ])

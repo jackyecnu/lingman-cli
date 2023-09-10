@@ -26,14 +26,14 @@ export function createController(config, args: string[]) {
   // @ts-expect-error xxx
   const namespace_slash = nameArr.reduce((pre, cur) => `${pre}/${cur.capitalize()}`, '')
 
-  const controllerFile = `package ${basePackage}.controllers;
-using ${basePackage}.services${namespace_dot};
+  const controllerFile = `package ${basePackage}.controllers${namespace_dot};
+import ${basePackage}.services${namespace_dot}.${class_name}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/${namespace_slash.toLowerCase()}/${class_name.toLowerCase()}")
+@RequestMapping("/api${namespace_slash.toLowerCase()}/${class_name.toLowerCase()}")
 public class ${class_name}Controller {
 
     @Autowired
@@ -46,7 +46,7 @@ public class ${class_name}Controller {
     console.log('File is created successfully.')
   })
 
-  const serviceFile = `package ${basePackage}.controllers;
+  const serviceFile = `package ${basePackage}.services${namespace_dot};
 
 import org.springframework.stereotype.Service;
 

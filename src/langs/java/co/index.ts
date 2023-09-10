@@ -22,9 +22,18 @@ export function createController(config, args: string[]) {
   nameArr.pop()
 
   // @ts-expect-error xxx
-  const namespace_dot = nameArr.reduce((pre, cur) => `${pre}.${cur.capitalize()}`, '')
+  const namespace_dot = nameArr.reduce((pre, cur) => `${pre}.${cur.capitalize()}`, '').toLowerCase()
   // @ts-expect-error xxx
-  const namespace_slash = nameArr.reduce((pre, cur) => `${pre}/${cur.capitalize()}`, '')
+  const namespace_slash = nameArr.reduce((pre, cur) => `${pre}/${cur.capitalize()}`, '').toLowerCase()
+
+  let folderPath = `src/main/java/${basePackage.replace(/\./g, '/')}/controllers/${namespace_slash}`
+  // 创建目标文件夹（如果它不存在）
+  if (!fs.existsSync(folderPath))
+    fs.mkdirSync(folderPath, { recursive: true })
+  folderPath = `src/main/java/${basePackage.replace(/\./g, '/')}/services/${namespace_slash}`
+  // 创建目标文件夹（如果它不存在）
+  if (!fs.existsSync(folderPath))
+    fs.mkdirSync(folderPath, { recursive: true })
 
   const controllerFile = `package ${basePackage}.controllers${namespace_dot};
 import ${basePackage}.services${namespace_dot}.${class_name}Service;

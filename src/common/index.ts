@@ -117,7 +117,7 @@ export function registerScripts(program: Command, config) {
 
   // 检查是否有重复的命令
   const commands = program.commands.map(item => item.name())
-  console.log(scripts)
+
   if (Object.keys(scripts).some(key => commands.includes(key))) {
     console.error(chalk.yellow('错误：') + chalk.red('scripts 不能和 lm 内置命令重复'))
     process.exit(0)

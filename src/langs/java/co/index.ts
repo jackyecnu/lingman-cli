@@ -40,10 +40,11 @@ import ${basePackage}.services${namespace_dot}.${class_name}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ${basePackage}.controllers.BaseController;
 
 @RestController
 @RequestMapping("/api${namespace_slash.toLowerCase()}/${class_name.toLowerCase()}")
-public class ${class_name}Controller {
+public class ${class_name}Controller extends BaseController {
 
     @Autowired
     private ${class_name}Service currentService;

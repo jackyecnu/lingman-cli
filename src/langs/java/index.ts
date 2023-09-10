@@ -1,6 +1,7 @@
 import type { Command } from 'commander'
-import { openDocs, openDocs1 } from '../donet/open'
+import { openDocs } from '../donet/open'
 import { updateLingmanVersionForJava } from './lingman'
+import { createController } from './co'
 
 export function langJava(program: Command, config) {
   program
@@ -18,9 +19,9 @@ export function langJava(program: Command, config) {
     })
 
   program
-    .command('api1')
-    .description('打开正式Api文档')
+    .command('co')
+    .description('创建Controller , 文件目录以.分割')
     .action(() => {
-      openDocs1(config)
+      createController(config, program.args.slice(1))
     })
 }

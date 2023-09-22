@@ -7,7 +7,7 @@ export async function updateLingmanVersionForJava() {
   const { data } = await axios.get('http://git.lingman.tech:8081/repository/maven-releases/com/lingman/common/maven-metadata.xml')
 
   const parser = new XMLParser()
-  const json = parser.parse(data)
+  const json = parser.parse(data) as any
 
   const releaseStableVersion = json.metadata.versioning.release
 

@@ -20,9 +20,11 @@ export function replacePackageName(packageName: string) {
   const groupId = packageName.split('.').slice(0, -1).join('.')
   const artifactId = packageName.split('.').slice(-1)[0]
 
+  const pomPath = path.resolve(process.cwd(), 'pom.xml')
+
   // 获取当前包名
   const parser = new XMLParser()
-  const data = fs.readFileSync('pom.xml', 'utf-8')
+  const data = fs.readFileSync(pomPath, 'utf-8')
   const json = parser.parse(data) as any
 
   const curGroupId = json.project.groupId
@@ -37,52 +39,63 @@ export function replacePackageName(packageName: string) {
     .replace(`<name>${curArtifactId}</name>`, `<name>${artifactId}</name>`)
     .replace(`<description>${curArtifactId}</description>`, `<description>${artifactId}</description>`)
 
-  fs.writeFileSync('pom.xml', newPom)
+  fs.writeFileSync(pomPath, newPom)
 
   // 第二步 修改文件夹名称 src/main/java/**
   const currentDirList = currentPackageName.split('.')
   const newDirList = packageName.split('.')
 
-  const changeDirList = ['src/main/java', 'src/test/java']
+  const changeDirList = [path.resolve(process.cwd(), 'src/main/java'), path.resolve(process.cwd(), 'src/test/java')]
 
   for (const changeDir of changeDirList) {
-    const contentDir = `${changeDir}/${currentDirList.join('/')}`
-    const targetDir = `${changeDir}/${newDirList.join('/')}`
+    const contentDir = path.resolve(changeDir, ...currentDirList)
+    const targetDir = path.resolve(changeDir, ...newDirList)
+    const tempDir = path.resolve(changeDir, '__temp__')
 
-    // 创建文件夹
-    fs.mkdirSync(targetDir, { recursive: true })
-    // 移动contentDir下所有文件夹和文件到targetDir
+    // 把contentDir下所有文件夹和文件移动到tempDir
+    fs.mkdirSync(tempDir, { recursive: true })
     fs.readdirSync(contentDir).forEach((file) => {
-      // if (`${contentDir}/${file}` === `${contentDir}/${artifactId}` && `${targetDir}/${file}` === `${contentDir}/${file}/${artifactId}`) return
-      fs.renameSync(`${contentDir}/${file}`, `${targetDir}/${file}`)
+      fs.renameSync(path.resolve(contentDir, file), path.resolve(tempDir, file))
     })
     // 删除contentDir
     fs.rmdirSync(contentDir, { recursive: true })
-    // 删除javaDir下的空文件夹，递归删除，除了targetDir下的文件夹
-    deleteEmptyDir(path.resolve(changeDir, '..'), targetDir)
+
+    // 创建文件夹
+    fs.mkdirSync(targetDir, { recursive: true })
+
+    // 把tempDir下所有文件夹和文件移动到targetDir
+    fs.readdirSync(tempDir).forEach((file) => {
+      fs.renameSync(path.resolve(tempDir, file), path.resolve(targetDir, file))
+    })
+    // 删除tempDir
+    fs.rmdirSync(tempDir, { recursive: true })
+
+    deleteEmptyDir(path.resolve(changeDir, '..'), [targetDir])
   }
 
   // 第三步 递归修改文件内容
-  replacePackageNameInDir(process.cwd(), currentPackageName, packageName)
+  replacePackageNameInDir(process.cwd(), currentPackageName, packageName, [pomPath])
 }
 
-function replacePackageNameInDir(filePath: string, oldStr: string, newStr: string) {
+function replacePackageNameInDir(filePath: string, oldStr: string, newStr: string, excludes: string[]) {
   const files = fs.readdirSync(filePath)
   for (const file of files) {
     const curPath = path.resolve(filePath, file)
     const stat = fs.statSync(curPath)
     if (stat.isDirectory()) {
-      replacePackageNameInDir(curPath, oldStr, newStr)
+      replacePackageNameInDir(curPath, oldStr, newStr, excludes)
     }
     else {
-      const content = fs.readFileSync(curPath, 'utf-8')
-      const newContent = content.replace(new RegExp(oldStr, 'g'), newStr)
-      fs.writeFileSync(curPath, newContent)
+      if (!excludes.includes(curPath)) {
+        const content = fs.readFileSync(curPath, 'utf-8')
+        const newContent = content.replace(new RegExp(oldStr, 'g'), newStr)
+        fs.writeFileSync(curPath, newContent)
+      }
     }
   }
 }
 
-function deleteEmptyDir(dir: string, exclude: string) {
+function deleteEmptyDir(dir: string, excludes: string[]) {
   const files = fs.readdirSync(dir)
 
   for (const file of files) {
@@ -91,8 +104,8 @@ function deleteEmptyDir(dir: string, exclude: string) {
     const stat = fs.statSync(filePath)
 
     if (stat.isDirectory()) {
-      if (filePath !== exclude)
-        deleteEmptyDir(filePath, exclude)
+      if (!excludes.includes(filePath))
+        deleteEmptyDir(filePath, excludes)
     }
   }
 

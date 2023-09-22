@@ -10,6 +10,7 @@ import { openInBrowser } from './open'
 import { getCommand, runCmd } from './runcmd'
 import { update } from './update'
 import { login, logout, me } from './user'
+import { createProject } from './create'
 
 export function langCommon(program: Command, config) {
   program
@@ -23,6 +24,13 @@ export function langCommon(program: Command, config) {
     .description('显示json配置文件')
     .action(() => {
       console.dir(config)
+    })
+
+  program
+    .command('create')
+    .description('创建项目')
+    .action(() => {
+      createProject()
     })
 
   program

@@ -20,7 +20,7 @@ const program = new Command()
 
 const configPath = path.resolve(process.cwd(), 'lingman.config.js')
 
-let config = { lang: '', co: {}, initConfig: {} } as any
+let config: Config = { lang: '', co: {}, initConfig: {} }
 
 if (fs.existsSync(configPath)) config = require(configPath)
 

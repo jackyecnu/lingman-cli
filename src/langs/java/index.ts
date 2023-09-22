@@ -2,6 +2,7 @@ import type { Command } from 'commander'
 import { openDocs } from '../donet/open'
 import { updateLingmanVersionForJava } from './lingman'
 import { createController } from './co'
+import { replacePackageName } from './replace/package_name'
 
 export function langJava(program: Command, config) {
   program
@@ -23,5 +24,12 @@ export function langJava(program: Command, config) {
     .description('创建Controller , 文件目录以.分割')
     .action(() => {
       createController(config, program.args.slice(1))
+    })
+
+  program
+    .command('pn')
+    .description('修改包名')
+    .action(() => {
+      replacePackageName(program.args.at(1))
     })
 }

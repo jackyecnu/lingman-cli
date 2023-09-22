@@ -29,6 +29,7 @@ export function replacePackageName(packageName: string) {
 
   const curGroupId = json.project.groupId
   const curArtifactId = json.project.artifactId
+  const curVersion = json.project.version
   const currentPackageName = `${curGroupId}.${curArtifactId}`
 
   if (currentPackageName === packageName) return
@@ -40,6 +41,20 @@ export function replacePackageName(packageName: string) {
     .replace(`<description>${curArtifactId}</description>`, `<description>${artifactId}</description>`)
 
   fs.writeFileSync(pomPath, newPom)
+
+  // 第一步 修改Dockerfile
+  const dockerfilePath = path.resolve(process.cwd(), 'Dockerfile')
+  const dockerfileContent = fs.readFileSync(dockerfilePath, 'utf-8')
+  const newDockerfileContent = dockerfileContent.replace(new RegExp(`${curArtifactId}-${curVersion}`, 'g'), `${artifactId}-${curVersion}`)
+  fs.writeFileSync(dockerfilePath, newDockerfileContent)
+
+  // 第二部 修改相应的文件夹
+  const changeFileList = [path.resolve(process.cwd(), 'lingman.config.js')]
+  for (const changeFile of changeFileList) {
+    const content = fs.readFileSync(changeFile, 'utf-8')
+    const newContent = content.replace(new RegExp(currentPackageName, 'g'), packageName)
+    fs.writeFileSync(changeFile, newContent)
+  }
 
   // 第二步 修改文件夹名称 src/main/java/**
   const currentDirList = currentPackageName.split('.')

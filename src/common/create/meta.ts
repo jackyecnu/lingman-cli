@@ -5,7 +5,6 @@ const createMeta: CreateMeta = {
     templateUrl: 'https://github.com/lingmancom/SpringbootStandardProject',
     effect({ packageName }) {
       replacePackageName(packageName)
-      console.log('Java')
     },
     prompt: [
       {

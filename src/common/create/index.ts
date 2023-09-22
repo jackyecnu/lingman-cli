@@ -27,7 +27,7 @@ export async function createProject() {
     Object.assign(effectOptions, customAnswer)
   }
 
-  execSync(`${createMeta[key].templateUrl} ${answer.name === '.' ? '--force' : answer.name} `, { stdio: 'inherit' })
+  execSync(`npx degit ${createMeta[key].templateUrl} ${answer.name === '.' ? '--force' : answer.name} `, { stdio: 'inherit' })
 
   const effect = createMeta[key].effect
 

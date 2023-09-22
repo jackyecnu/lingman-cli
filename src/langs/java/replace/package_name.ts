@@ -74,7 +74,7 @@ export function replacePackageName(packageName: string) {
   }
 
   // 第三步 递归修改文件内容
-  replacePackageNameInDir(process.cwd(), currentPackageName, packageName, [pomPath])
+  replacePackageNameInDir(process.cwd(), currentPackageName, packageName, [pomPath, path.resolve(process.cwd(), '.git')])
 }
 
 function replacePackageNameInDir(filePath: string, oldStr: string, newStr: string, excludes: string[]) {
@@ -82,7 +82,7 @@ function replacePackageNameInDir(filePath: string, oldStr: string, newStr: strin
   for (const file of files) {
     const curPath = path.resolve(filePath, file)
     const stat = fs.statSync(curPath)
-    if (stat.isDirectory()) {
+    if (stat.isDirectory() && !excludes.includes(curPath)) {
       replacePackageNameInDir(curPath, oldStr, newStr, excludes)
     }
     else {

@@ -38,6 +38,7 @@ export function createController(config, args: string[]) {
   const controllerFile = `package ${basePackage}.controllers${namespace_dot};
 import ${basePackage}.services${namespace_dot}.${class_name}Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.lm.tools.R;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ${basePackage}.controllers.BaseController;

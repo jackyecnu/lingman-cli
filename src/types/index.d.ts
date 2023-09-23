@@ -18,3 +18,8 @@ interface CreateMeta {
   }
 }
 
+interface ReplacePackageNameOptions {
+  packageName: string
+  workDir?: string
+}
+

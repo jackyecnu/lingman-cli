@@ -30,6 +30,6 @@ export function langJava(program: Command, config) {
     .command('pn')
     .description('修改包名')
     .action(() => {
-      replacePackageName(program.args.at(1))
+      replacePackageName({ packageName: program.args.at(1) })
     })
 }

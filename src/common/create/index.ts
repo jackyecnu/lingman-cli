@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process'
+import path from 'node:path'
 import inquirer from 'inquirer'
 import createMeta from './meta'
 
@@ -19,15 +20,16 @@ export async function createProject() {
   ])
 
   const key = answer.project as keyof typeof createMeta
+  const name = answer.name
 
   const effectOptions = {}
   if (createMeta[key].prompt) {
     const customAnswer = await inquirer.prompt(createMeta[key].prompt)
 
-    Object.assign(effectOptions, customAnswer)
+    Object.assign(effectOptions, customAnswer, { workDir: name === '.' ? process.cwd() : path.resolve(process.cwd(), name) })
   }
 
-  execSync(`npx degit ${createMeta[key].templateUrl} ${answer.name === '.' ? '--force' : answer.name} `, { stdio: 'inherit' })
+  execSync(`npx degit ${createMeta[key].templateUrl} ${name === '.' ? '--force' : name}`, { stdio: 'inherit' })
 
   const effect = createMeta[key].effect
 

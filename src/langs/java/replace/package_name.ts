@@ -3,7 +3,7 @@ import path from 'node:path'
 import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
 
-export function replacePackageName(packageName: string) {
+export function replacePackageName({ packageName, workDir = process.cwd() }: ReplacePackageNameOptions) {
   console.log('replacePackageName', packageName)
 
   // 检查包名是否合法
@@ -20,7 +20,7 @@ export function replacePackageName(packageName: string) {
   const groupId = packageName.split('.').slice(0, -1).join('.')
   const artifactId = packageName.split('.').slice(-1)[0]
 
-  const pomPath = path.resolve(process.cwd(), 'pom.xml')
+  const pomPath = path.resolve(workDir, 'pom.xml')
 
   // 获取当前包名
   const parser = new XMLParser()
@@ -43,24 +43,16 @@ export function replacePackageName(packageName: string) {
   fs.writeFileSync(pomPath, newPom)
 
   // 第一步 修改Dockerfile
-  const dockerfilePath = path.resolve(process.cwd(), 'Dockerfile')
+  const dockerfilePath = path.resolve(workDir, 'Dockerfile')
   const dockerfileContent = fs.readFileSync(dockerfilePath, 'utf-8')
   const newDockerfileContent = dockerfileContent.replace(new RegExp(`${curArtifactId}-${curVersion}`, 'g'), `${artifactId}-${curVersion}`)
   fs.writeFileSync(dockerfilePath, newDockerfileContent)
-
-  // 第二部 修改相应的文件夹
-  const changeFileList = [path.resolve(process.cwd(), 'lingman.config.js')]
-  for (const changeFile of changeFileList) {
-    const content = fs.readFileSync(changeFile, 'utf-8')
-    const newContent = content.replace(new RegExp(currentPackageName, 'g'), packageName)
-    fs.writeFileSync(changeFile, newContent)
-  }
 
   // 第二步 修改文件夹名称 src/main/java/**
   const currentDirList = currentPackageName.split('.')
   const newDirList = packageName.split('.')
 
-  const changeDirList = [path.resolve(process.cwd(), 'src/main/java'), path.resolve(process.cwd(), 'src/test/java')]
+  const changeDirList = [path.resolve(workDir, 'src/main/java'), path.resolve(workDir, 'src/test/java')]
 
   for (const changeDir of changeDirList) {
     const contentDir = path.resolve(changeDir, ...currentDirList)
@@ -89,23 +81,23 @@ export function replacePackageName(packageName: string) {
   }
 
   // 第三步 递归修改文件内容
-  replacePackageNameInDir(process.cwd(), currentPackageName, packageName, [pomPath, path.resolve(process.cwd(), '.git')])
+  replacePackageNameInDir(workDir, currentPackageName, packageName, [pomPath, path.resolve(workDir, '.git')])
 }
 
 function replacePackageNameInDir(filePath: string, oldStr: string, newStr: string, excludes: string[]) {
   const files = fs.readdirSync(filePath)
   for (const file of files) {
     const curPath = path.resolve(filePath, file)
+    if (excludes.includes(curPath)) continue
+
     const stat = fs.statSync(curPath)
-    if (stat.isDirectory() && !excludes.includes(curPath)) {
+    if (stat.isDirectory()) {
       replacePackageNameInDir(curPath, oldStr, newStr, excludes)
     }
     else {
-      if (!excludes.includes(curPath)) {
-        const content = fs.readFileSync(curPath, 'utf-8')
-        const newContent = content.replace(new RegExp(oldStr, 'g'), newStr)
-        fs.writeFileSync(curPath, newContent)
-      }
+      const content = fs.readFileSync(curPath, 'utf-8')
+      const newContent = content.replace(new RegExp(oldStr, 'g'), newStr)
+      fs.writeFileSync(curPath, newContent)
     }
   }
 }

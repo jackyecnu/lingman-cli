@@ -3,8 +3,8 @@ import { replacePackageName } from '../../langs/java/replace/package_name'
 const createMeta: CreateMeta = {
   Java: {
     templateUrl: 'https://github.com/lingmancom/SpringbootStandardProject',
-    effect({ packageName }) {
-      replacePackageName(packageName)
+    effect({ packageName, workDir }) {
+      replacePackageName({ packageName, workDir })
     },
     prompt: [
       {

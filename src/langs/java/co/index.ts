@@ -45,6 +45,7 @@ import ${basePackage}.controllers.BaseController;
 
 @RestController
 @RequestMapping("/api${namespace_slash.toLowerCase()}/${class_name.toLowerCase()}")
+@Tag(name = "${class_name}Controller", description = "xx")
 public class ${class_name}Controller extends BaseController {
 
     @Autowired

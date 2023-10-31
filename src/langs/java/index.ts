@@ -3,6 +3,7 @@ import { openDocs } from '../donet/open'
 import { updateLingmanVersionForJava } from './lingman'
 import { createController } from './co'
 import { replacePackageName } from './replace/package_name'
+import { syncDB } from './sync/db'
 
 export function langJava(program: Command, config) {
   program
@@ -31,5 +32,13 @@ export function langJava(program: Command, config) {
     .description('修改包名')
     .action(() => {
       replacePackageName({ packageName: program.args.at(1) })
+    })
+
+  program
+    .command('sync')
+    .description('同步数据库')
+    .option('-n, --new', '强制更新db-generator.jar')
+    .action((ops) => {
+      syncDB(config, ops.new)
     })
 }

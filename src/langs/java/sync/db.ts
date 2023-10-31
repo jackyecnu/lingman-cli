@@ -17,15 +17,15 @@ export async function syncDB(config, isNew: boolean) {
   const workDir = process.cwd()
   const db = config.db
 
-  const dbGeneratorLink = db.link || 'https://198401.oss-cn-shanghai.aliyuncs.com/test/db-generator.jar'
-
-  if (!fs.existsSync(outputFilePath) || isNew)
-    await downloadDBGenerator(dbGeneratorLink, outputFilePath)
-
   if (!db) {
     console.log(chalk.bold.red('db 配置不存在'))
     process.exit(1)
   }
+
+  const dbGeneratorLink = db.link || 'https://198401.oss-cn-shanghai.aliyuncs.com/test/db-generator.jar'
+
+  if (!fs.existsSync(outputFilePath) || isNew)
+    await downloadDBGenerator(dbGeneratorLink, outputFilePath)
 
   if (!db.name) {
     console.log(chalk.bold.red('db.name 配置不存在'))

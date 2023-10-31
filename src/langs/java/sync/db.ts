@@ -72,14 +72,21 @@ function downloadDBGenerator(dbGeneratorLink, outputFilePath: string): Promise<v
 
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(outputFilePath)
-    const request = https.get(dbGeneratorLink, (response) => {
+
+    https.get(dbGeneratorLink, (response) => {
       response.pipe(file)
-      console.log(chalk.bold.green('下载完成'))
-      resolve()
-    })
-    request.on('error', (err) => {
-      console.log(chalk.bold.red('下载失败'))
-      reject(err)
+
+      file.on('finish', () => {
+        file.close(() => {
+          console.log(chalk.bold.green('文件下载完成.'))
+          resolve()
+        })
+      })
+    }).on('error', (err) => {
+      fs.unlink(outputFilePath, () => {
+        console.error(chalk.bold.red(`文件下载失败: ${err.message}`))
+        reject(err)
+      })
     })
   })
 }

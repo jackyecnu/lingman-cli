@@ -1,4 +1,5 @@
 import fs from 'node:fs'
+import process from 'node:process'
 import axios from 'axios'
 import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'

@@ -1,5 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs'
+import process from 'node:process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { initConfigTemplate, langs } from '../../shared'
@@ -8,6 +9,7 @@ export async function init() {
   const configPath = path.resolve(process.cwd(), 'lingman.config.js')
   if (fs.existsSync(configPath)) {
     let config = { lang: '', co: {}, initConfig: {} } as any
+    // eslint-disable-next-line ts/no-require-imports
     config = require(configPath)
     if (config)
       console.log('该程序配置为：', config.lang)

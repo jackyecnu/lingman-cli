@@ -1,5 +1,6 @@
 import { execSync } from 'node:child_process'
 import path from 'node:path'
+import process from 'node:process'
 import inquirer from 'inquirer'
 import createMeta from './meta'
 

@@ -18,7 +18,8 @@ export function clear() {
 
   cleans.forEach((clean) => {
     // 判断是否存在
-    if (!fs.existsSync(clean)) return
+    if (!fs.existsSync(clean))
+      return
 
     console.log(chalk.bold.green(`清除 ${clean}`))
     rimrafSync(clean)

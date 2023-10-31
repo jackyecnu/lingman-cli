@@ -3,7 +3,8 @@ import inquirer from 'inquirer'
 import { openInBrowser } from '../../../common/open'
 
 export async function openDocs({ api }, args: string[]) {
-  if (!api) return console.log(chalk.bold.red('缺少api配置'))
+  if (!api)
+    return console.log(chalk.bold.red('缺少api配置'))
   const key = args[0]
 
   if (Object.prototype.toString.call(api) === '[object Object]') {
@@ -41,11 +42,13 @@ export async function openDocs({ api }, args: string[]) {
 }
 
 export function openDocs1({ api1 }) {
-  if (!api1) return console.log(chalk.bold.red('缺少api1配置'))
+  if (!api1)
+    return console.log(chalk.bold.red('缺少api1配置'))
   openInBrowser(api1)
 }
 
 export function openLog({ log }) {
-  if (!log) return console.log(chalk.bold.red('缺少log地址配置'))
+  if (!log)
+    return console.log(chalk.bold.red('缺少log地址配置'))
   openInBrowser(log)
 }

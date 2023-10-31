@@ -4,9 +4,12 @@ import chalk from 'chalk'
 
 export function createController(config, args: string[]) {
   const { ApiPath, BLLPath, ModelPath } = config.co
-  if (!ApiPath) return console.log(chalk.bold.red('缺少ApiPath配置'))
-  if (!BLLPath) return console.log(chalk.bold.red('缺少BLLPath配置'))
-  if (!ModelPath) return console.log(chalk.bold.red('缺少ModelPath配置'))
+  if (!ApiPath)
+    return console.log(chalk.bold.red('缺少ApiPath配置'))
+  if (!BLLPath)
+    return console.log(chalk.bold.red('缺少BLLPath配置'))
+  if (!ModelPath)
+    return console.log(chalk.bold.red('缺少ModelPath配置'))
   if (args.length === 0) {
     console.log('\x1B[33m%s\x1B[0m', '需要传入Controller参数')
     return
@@ -48,7 +51,8 @@ namespace ${ApiPath}.Controllers${namespace_dot}
 `
 
   fs.writeFile(`${ApiPath}/Controllers${namespace_slash}/${class_name}Controller.cs`, controllerFile, { flag: 'wx' }, (err) => {
-    if (err) throw err
+    if (err)
+      throw err
     console.log('File is created successfully.')
   })
 
@@ -69,7 +73,8 @@ namespace ${BLLPath}.Service${namespace_dot}
 `
 
   fs.writeFile(`${BLLPath}/Service${namespace_slash}/${class_name}Service.cs`, serviceFile, { flag: 'wx' }, (err) => {
-    if (err) throw err
+    if (err)
+      throw err
     console.log('File is created successfully.')
   })
 }

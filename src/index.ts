@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { Command } from 'commander'
 
 import axios from 'axios'
@@ -22,7 +23,9 @@ const configPath = path.resolve(process.cwd(), 'lingman.config.js')
 
 let config: Config = { lang: '', co: {}, initConfig: {} }
 
-if (fs.existsSync(configPath)) config = require(configPath)
+if (fs.existsSync(configPath))
+  // eslint-disable-next-line ts/no-require-imports
+  config = require(configPath)
 
 export default async function () {
   langs[config.lang] && langs[config.lang](program, config)

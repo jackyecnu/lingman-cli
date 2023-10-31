@@ -1,5 +1,6 @@
 import path from 'node:path'
 import fs from 'node:fs'
+import process from 'node:process'
 import axios from 'axios'
 import chalk from 'chalk'
 import { checkLogin } from '../../../utils/user'
@@ -21,7 +22,8 @@ export async function updateBuildVersion(project: string, args: string[]) {
   const reg = /version:\s+\d+\.\d+\.\d+(\+\d+)?/
 
   fs.writeFileSync(pubspecPath, pubspec.replace(reg, (match, build) => {
-    if (!build) return `${match}+${data}`
+    if (!build)
+      return `${match}+${data}`
     return match.replace(/\d+$/, data.toString())
   }))
 }

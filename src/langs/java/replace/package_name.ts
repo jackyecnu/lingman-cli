@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
 
@@ -32,7 +33,8 @@ export function replacePackageName({ packageName, workDir = process.cwd() }: Rep
   const curVersion = json.project.version
   const currentPackageName = `${curGroupId}.${curArtifactId}`
 
-  if (currentPackageName === packageName) return
+  if (currentPackageName === packageName)
+    return
 
   // 第一步 pom.xml替换包名
   const newPom = data.replace(`<groupId>${curGroupId}</groupId>`, `<groupId>${groupId}</groupId>`)
@@ -88,7 +90,8 @@ function replacePackageNameInDir(filePath: string, oldStr: string, newStr: strin
   const files = fs.readdirSync(filePath)
   for (const file of files) {
     const curPath = path.resolve(filePath, file)
-    if (excludes.includes(curPath)) continue
+    if (excludes.includes(curPath))
+      continue
 
     const stat = fs.statSync(curPath)
     if (stat.isDirectory()) {

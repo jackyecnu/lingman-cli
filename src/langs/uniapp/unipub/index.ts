@@ -1,14 +1,16 @@
 import { join, resolve } from 'node:path'
+import process from 'node:process'
 import fs from 'fs-extra'
 import axios from 'axios'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { runCmd } from '../../../common/runcmd'
+
 // import FormData from 'form-data'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
 const FormData = require('form-data')
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
 const ci = require('miniprogram-ci')
 
 export async function unipub(para, args: string[]) {
@@ -67,7 +69,8 @@ export async function unipub(para, args: string[]) {
     const filePath = join(process.cwd(), './src/manifest.json')
     const versionName = `0.0.${Math.floor(new Date().getTime() / 1000)}`
     fs.readFile(filePath, 'utf-8', (err, data) => {
-      if (err) throw err
+      if (err)
+        throw err
       // "versionName" : "1.4.6",
       const newData = data.replace(
         /\"versionName\"\s*:\s*\"(\d+).(\d+).(\d+)\"/,
@@ -180,13 +183,14 @@ export async function unipub(para, args: string[]) {
         versionName = data.data.data.replace(
           /(\d+).(\d+).(\d+)/,
           (a, b, c, d) => {
-            const newVersion = parseInt(d) + 1
+            const newVersion = Number.parseInt(d) + 1
             return `${b}.${c}.${newVersion}`
           },
         )
         console.log(versionName)
         fs.readFile(filePath, 'utf-8', (err, data) => {
-          if (err) throw err
+          if (err)
+            throw err
           // "versionName" : "1.4.6",
 
           const newData = data.replace(

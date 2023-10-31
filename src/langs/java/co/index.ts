@@ -4,7 +4,8 @@ import chalk from 'chalk'
 
 export function createController(config, args: string[]) {
   const basePackage = config.co
-  if (!basePackage) return console.log(chalk.bold.red('缺少base package配置'))
+  if (!basePackage)
+    return console.log(chalk.bold.red('缺少base package配置'))
   if (args.length === 0) {
     console.log('\x1B[33m%s\x1B[0m', '需要传入Controller参数')
     return
@@ -55,7 +56,8 @@ public class ${class_name}Controller extends BaseController {
 `
 
   fs.writeFile(`src/main/java/${basePackage.replace(/\./g, '/')}/controllers/${namespace_slash}/${class_name}Controller.java`, controllerFile, { flag: 'wx' }, (err) => {
-    if (err) throw err
+    if (err)
+      throw err
     console.log('File is created successfully.')
   })
 
@@ -70,7 +72,8 @@ public class ${class_name}Service {
 `
 
   fs.writeFile(`src/main/java/${basePackage.replace(/\./g, '/')}/services/${namespace_slash}/${class_name}Service.java`, serviceFile, { flag: 'wx' }, (err) => {
-    if (err) throw err
+    if (err)
+      throw err
     console.log('File is created successfully.')
   })
 }

@@ -1,4 +1,5 @@
 import { execSync } from 'node:child_process'
+import process from 'node:process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { runCmd } from '../runcmd'
@@ -32,7 +33,8 @@ export function openGitRepoByBrowser() {
 }
 
 export async function chooseMessage() {
-  if (checkGitStats()) return
+  if (checkGitStats())
+    return
 
   const choose = await inquirer.prompt([
     {
@@ -43,7 +45,8 @@ export async function chooseMessage() {
     },
   ])
 
-  if (choose.type === messageTypes['发版']) return gitPush(`${choose.type}release`)
+  if (choose.type === messageTypes['发版'])
+    return gitPush(`${choose.type}release`)
 
   const message = await inquirer.prompt([
     {
@@ -92,6 +95,7 @@ export function checkGitStats() {
 }
 
 export function gitPushAll(message) {
-  if (checkGitStats()) return
+  if (checkGitStats())
+    return
   gitPush(message)
 }

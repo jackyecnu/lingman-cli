@@ -1,3 +1,4 @@
+import process from 'node:process'
 import type { Command } from 'commander'
 import chalk from 'chalk'
 import { version } from '../../package.json'

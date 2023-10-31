@@ -1,10 +1,12 @@
 import { execSync } from 'node:child_process'
+import process from 'node:process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
 import axios from 'axios'
 
 export async function runCmd(cmd, win = 'powershell') {
-  if (!cmd) return console.log(chalk.bold.red('缺少指令配置'))
+  if (!cmd)
+    return console.log(chalk.bold.red('缺少指令配置'))
   const isWin = process.platform === 'win32'
 
   if (isWin) {

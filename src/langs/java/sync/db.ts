@@ -1,6 +1,7 @@
 import path from 'node:path'
 import fs from 'node:fs'
 import https from 'node:https'
+import process from 'node:process'
 import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
 import { runCmd } from '../../../common/runcmd'
@@ -75,6 +76,10 @@ function downloadDBGenerator(dbGeneratorLink, outputFilePath: string): Promise<v
       response.pipe(file)
       console.log(chalk.bold.green('下载完成'))
       resolve()
+    })
+    request.on('error', (err) => {
+      console.log(chalk.bold.red('下载失败'))
+      reject(err)
     })
   })
 }

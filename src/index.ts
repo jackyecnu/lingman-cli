@@ -4,6 +4,7 @@ import process from 'node:process'
 import { Command } from 'commander'
 
 import axios from 'axios'
+import chalk from 'chalk'
 import { langCommon, registerScripts } from './common'
 import { langs } from './shared'
 import { checkVersion } from './utils/checkVersion'
@@ -38,3 +39,13 @@ export default async function () {
 
   checkVersion()
 }
+
+// 捕获全局异常
+process.on('uncaughtException', (err) => {
+  console.log(chalk.red('异常信息：', err.message))
+})
+
+// 捕获全局 Promise 异常
+// process.on('unhandledRejection', (err) => {
+//   console.error('unhandledRejection', err)
+// })

@@ -2,15 +2,15 @@ import path from 'node:path'
 import fs from 'node:fs'
 import https from 'node:https'
 import chalk from 'chalk'
-import { runCmd } from '../../../common/runcmd'
 import { XMLParser } from 'fast-xml-parser'
+import { runCmd } from '../../../common/runcmd'
 import { getHomeDir } from '../../../utils'
 
 export async function syncDB(config, isNew: boolean) {
   const javaDir = path.join(getHomeDir(), 'java')
-  if (!fs.existsSync(javaDir)) {
+  if (!fs.existsSync(javaDir))
     fs.mkdirSync(javaDir)
-  }
+
   const outputFilePath = path.join(javaDir, 'db-generator.jar')
 
   const workDir = process.cwd()
@@ -18,10 +18,8 @@ export async function syncDB(config, isNew: boolean) {
 
   const dbGeneratorLink = db.link || 'https://198401.oss-cn-shanghai.aliyuncs.com/test/db-generator.jar'
 
-  if (!fs.existsSync(outputFilePath) || isNew) {
+  if (!fs.existsSync(outputFilePath) || isNew)
     await downloadDBGenerator(dbGeneratorLink, outputFilePath)
-  }
-
 
   if (!db) {
     console.log(chalk.bold.red('db 配置不存在'))
@@ -73,7 +71,7 @@ function downloadDBGenerator(dbGeneratorLink, outputFilePath: string): Promise<v
 
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(outputFilePath)
-    const request = https.get(dbGeneratorLink, function (response) {
+    const request = https.get(dbGeneratorLink, (response) => {
       response.pipe(file)
       console.log(chalk.bold.green('下载完成'))
       resolve()

@@ -5,7 +5,7 @@ import { version } from '../../package.json'
 import { PlatformX } from '../utils/platformX'
 import { changeForGit } from './changeForGit'
 import { checkOnlineAppVersion } from './checkOnlineAppVersion'
-import { chooseMessage, openGitRepoByBrowser } from './git'
+import { chooseMessage, gitPushAll, openGitRepoByBrowser } from './git'
 import { init } from './init'
 import { openInBrowser } from './open'
 import { getCommand, runCmd } from './runcmd'
@@ -42,7 +42,13 @@ export function langCommon(program: Command, config) {
       // console.log(options.message, 'aaaa1', program.args.slice(1))
       // console.dir(options)
       // gitPush(options.message, options.message ? program.args.slice(1) : program.args)
-      chooseMessage()
+      const message = program.args.slice(1).join(' ').trim()
+
+      if (message)
+        gitPushAll(message)
+
+      else
+        chooseMessage()
     })
 
   program

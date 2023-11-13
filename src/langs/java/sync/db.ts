@@ -47,6 +47,15 @@ export async function syncDB(config, isNew: boolean) {
     process.exit(1)
   }
 
+  if (!db.nameStrategy)
+    db.nameStrategy = 'underline_to_camel'
+
+  else if (db.nameStrategy === 'no_change')
+    db.nameStrategy = 'no_change'
+
+  else
+    db.nameStrategy = 'underline_to_camel'
+
   const pomPath = path.resolve(workDir, 'pom.xml')
 
   if (!fs.existsSync(pomPath)) {
@@ -62,7 +71,7 @@ export async function syncDB(config, isNew: boolean) {
   const curArtifactId = json.project.artifactId
   const currentPackageName = `${curGroupId}.${curArtifactId}`
 
-  const command = `java -jar ${outputFilePath} --project.path=${workDir} --project.relativePath=${currentPackageName} --db.name=${db.name} --db.url=${db.url} --db.username=${db.username} --db.password=${db.password}`
+  const command = `java -jar ${outputFilePath} --project.path=${workDir} --project.relativePath=${currentPackageName} --db.name=${db.name} --db.url=${db.url} --db.username=${db.username} --db.password=${db.password} --db.nameStrategy=${db.nameStrategy}`
 
   runCmd(command)
 }

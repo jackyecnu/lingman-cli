@@ -14,6 +14,9 @@ const createMeta: CreateMeta = {
       },
     ],
   },
+  公司应用网站: {
+    templateUrl: 'https://github.com/lingmancom/company-website-app-starter',
+  },
 }
 
 export default createMeta

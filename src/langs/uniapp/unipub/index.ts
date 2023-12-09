@@ -6,14 +6,13 @@ import chalk from 'chalk'
 import inquirer from 'inquirer'
 import { runCmd } from '../../../common/runcmd'
 
-// import FormData from 'form-data'
-// eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
-const FormData = require('form-data')
-
-// eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
-const ci = require('miniprogram-ci')
-
 export async function unipub(para, args: string[]) {
+  // eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
+  const FormData = require('form-data')
+
+  // eslint-disable-next-line ts/no-require-imports, ts/no-var-requires
+  const ci = require('miniprogram-ci')
+
   // 请选择发布版本
   const notifyUrl = 'https://api-lmapp.lingman.tech/api/public/programpublish'
   // 请输入发布国家

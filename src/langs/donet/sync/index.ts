@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { runCmd } from '../../../common/runcmd'
+import { runCmd } from '@/common/runcmd'
 
 export async function sync(config, args: string[]) {
   const sync = config.sync

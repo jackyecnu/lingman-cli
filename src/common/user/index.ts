@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import axios from 'axios'
 import inquirer from 'inquirer'
-import { checkLogin, clearToken, clearUser, getUser, saveToken } from '../../utils/user'
+import { checkLogin, clearToken, clearUser, getUser, saveToken } from '@/utils/user'
 
 export async function login() {
   await inquirer.prompt([

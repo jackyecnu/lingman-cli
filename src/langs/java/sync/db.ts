@@ -4,8 +4,8 @@ import https from 'node:https'
 import process from 'node:process'
 import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
-import { runCmd } from '../../../common/runcmd'
-import { getHomeDir } from '../../../utils'
+import { getHomeDir } from '@/utils'
+import { runCmd } from '@/common/runcmd'
 
 export async function syncDB(config, isNew: boolean) {
   const javaDir = path.join(getHomeDir(), 'java')

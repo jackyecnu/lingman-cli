@@ -1,11 +1,11 @@
 import type { Command } from 'commander'
-import { runShell } from '../../utils/runShell'
 import { build } from './build'
 import { updateDotnetBuildVersion } from './build-version'
 import { createController } from './co'
 import { initHelper } from './init-helper'
 import { openDocs, openLog } from './open'
 import { sync } from './sync'
+import { runShell } from '@/utils/runShell'
 
 export function langDotnet(program: Command, config) {
   program

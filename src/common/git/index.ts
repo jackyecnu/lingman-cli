@@ -2,9 +2,9 @@ import { execSync } from 'node:child_process'
 import process from 'node:process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { runCmd } from '../runcmd'
-import { messageTypes } from '../../shared'
 import { openInBrowser } from '../open'
+import { runCmd } from '../runcmd'
+import { messageTypes } from '@/shared'
 
 export async function gitPush(message, args: string[] = []) {
   if (!message) {

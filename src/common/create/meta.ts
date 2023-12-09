@@ -1,4 +1,4 @@
-import { replacePackageName } from '../../langs/java/replace/package_name'
+import { replacePackageName } from '@/langs/java/replace/package_name'
 
 const createMeta: CreateMeta = {
   Java: {

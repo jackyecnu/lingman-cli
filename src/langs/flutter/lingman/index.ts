@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import axios from 'axios'
 import chalk from 'chalk'
-import { runCmd } from '../../../common/runcmd'
+import { runCmd } from '@/common/runcmd'
 
 export async function updateLingmanVersionForFlutter() {
   const res = await axios.get('https://api-lmapp.lingman.tech/api/Public/flutter_lingman')

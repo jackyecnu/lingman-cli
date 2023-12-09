@@ -1,10 +1,10 @@
 import type { Command } from 'commander'
-import { gitPushAll } from '../../common/git'
-import { openInBrowser } from '../../common/open'
-import { runCmd } from '../../common/runcmd'
-import { messageTypes } from './../../shared/index'
 import { updateLingmanVersionForFlutter } from './lingman'
 import { updateBuildVersion } from './update'
+import { runCmd } from '@/common/runcmd'
+import { gitPushAll } from '@/common/git'
+import { messageTypes } from '@/shared'
+import { openInBrowser } from '@/common/open'
 
 export function langFlutter(program: Command, config) {
   program

@@ -3,7 +3,7 @@ import fs from 'node:fs'
 import process from 'node:process'
 import axios from 'axios'
 import chalk from 'chalk'
-import { checkLogin } from '../../../utils/user'
+import { checkLogin } from '@/utils/user'
 
 export async function updateBuildVersion(project: string, args: string[]) {
   if (args.length !== 1) {

@@ -15,7 +15,13 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
     "isolatedModules": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
   },
   "include": [
     "src",

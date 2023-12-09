@@ -4,7 +4,7 @@ import fs from 'fs-extra'
 import axios from 'axios'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { runCmd } from '../../../common/runcmd'
+import { runCmd } from '@/common/runcmd'
 
 export async function unipub(para, args: string[]) {
   // eslint-disable-next-line ts/no-require-imports, ts/no-var-requires

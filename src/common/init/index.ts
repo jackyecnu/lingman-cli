@@ -3,16 +3,16 @@ import fs from 'node:fs'
 import process from 'node:process'
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { initConfigTemplate, langs } from '../../shared'
+import { loadConfig } from '@/shared/config'
+import { initConfigTemplate, langs } from '@/shared'
 
 export async function init() {
+  const { config } = await loadConfig()
+
   const configPath = path.resolve(process.cwd(), 'lingman.config.js')
-  if (fs.existsSync(configPath)) {
-    let config = { lang: '', co: {}, initConfig: {} } as any
-    // eslint-disable-next-line ts/no-require-imports
-    config = require(configPath)
-    if (config)
-      console.log('该程序配置为：', config.lang)
+
+  if (config.lang) {
+    console.log(chalk.bold.green(`该程序配置为：${config.lang}`))
   }
   else {
     console.log(chalk.bold.blue('请输入需要需要配置的语言：'))

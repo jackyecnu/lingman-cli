@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import inquirer from 'inquirer'
-import { openInBrowser } from '../../../common/open'
+import { openInBrowser } from '@/common/open'
 
 export async function openDocs({ api }, args: string[]) {
   if (!api)

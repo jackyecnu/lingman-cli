@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
     "target": "es2017",
+    "baseUrl": ".",
     "module": "commonjs",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
     "resolveJsonModule": true,
     "strict": true,
     "strictBindCallApply": false,
@@ -15,13 +21,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": false,
     "isolatedModules": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+    "skipLibCheck": true
   },
   "include": [
     "src",

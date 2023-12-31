@@ -67,7 +67,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ${class_name}Service {
+public class ${class_name}Service extends BaseService {
 }
 `
 

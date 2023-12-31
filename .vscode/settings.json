@@ -5,7 +5,7 @@
     "enable": true
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll": true
+    "source.fixAll": "explicit"
   },
   "editor.tabSize": 2,
   "eslint.validate": [

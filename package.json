@@ -1,6 +1,6 @@
 {
   "name": "lingman-cli",
-  "version": "1.0.170",
+  "version": "1.0.171",
   "packageManager": "pnpm@7.3.0",
   "description": "",
   "author": "",
@@ -20,6 +20,7 @@
     "build": "tsup",
     "build:tsc": "tsc",
     "release": "git add . && bumpp --commit --push --all --tag",
+    "test": "vitest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -46,7 +47,8 @@
     "lint-staged": "^13.0.3",
     "tsup": "^8.0.1",
     "typescript": "^4.8.3",
-    "unconfig": "^0.3.11"
+    "unconfig": "^0.3.11",
+    "vitest": "^1.2.2"
   },
   "lint-staged": {
     "*.{js,ts,tsx,vue,md,json}": "eslint --fix"

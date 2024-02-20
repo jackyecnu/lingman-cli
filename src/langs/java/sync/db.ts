@@ -27,11 +27,6 @@ export async function syncDB(config, isNew: boolean) {
   if (!fs.existsSync(outputFilePath) || isNew)
     await downloadDBGenerator(dbGeneratorLink, outputFilePath)
 
-  if (!db.name) {
-    console.log(chalk.bold.red('db.name 配置不存在'))
-    process.exit(1)
-  }
-
   if (!db.url) {
     console.log(chalk.bold.red('db.url 配置不存在'))
     process.exit(1)
@@ -71,7 +66,7 @@ export async function syncDB(config, isNew: boolean) {
   const curArtifactId = json.project.artifactId
   const currentPackageName = `${curGroupId}.${curArtifactId}`
 
-  const command = `java -jar ${outputFilePath} --project.path=${workDir} --project.relativePath=${currentPackageName} --db.name=${db.name} --db.url=${db.url} --db.username=${db.username} --db.password=${db.password} --db.nameStrategy=${db.nameStrategy}`
+  const command = `java -jar ${outputFilePath} --project.path=${workDir} --project.relativePath=${currentPackageName} --db.url=${db.url} --db.username=${db.username} --db.password=${db.password} --db.nameStrategy=${db.nameStrategy}`
 
   runCmd(command)
 }

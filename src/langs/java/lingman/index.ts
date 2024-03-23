@@ -20,15 +20,20 @@ export async function updateLingmanVersionForJava() {
   for (const pomFile of pomFiles) {
     const pom = fs.readFileSync(pomFile, 'utf-8')
 
-    const reg = /<groupId>com.lm.starter<\/groupId>\s+<artifactId>lm-tools-spring-boot-starter<\/artifactId>\s+<version>(.*)<\/version>/
+    const regList = [
+      /<groupId>com.lm<\/groupId>\s+<artifactId>tools<\/artifactId>\s+<version>(.*)<\/version>/,
+      /<groupId>com.lm.starter<\/groupId>\s+<artifactId>lm-tools-spring-boot-starter<\/artifactId>\s+<version>(.*)<\/version>/,
+    ]
 
-    if (reg.test(pom)) {
-      const currentVersion = pom.match(reg)[1]
-      const oldString = pom.match(reg)[0]
-      if (currentVersion !== releaseStableVersion) {
-        const newPom = pom.replace(reg, oldString.replace(currentVersion, releaseStableVersion))
-        fs.writeFileSync(pomFile, newPom)
-        console.log(chalk.bold.green(`更新成功: ${pomFile}`))
+    for (const reg of regList) {
+      if (reg.test(pom)) {
+        const currentVersion = pom.match(reg)[1]
+        const oldString = pom.match(reg)[0]
+        if (currentVersion !== releaseStableVersion) {
+          const newPom = pom.replace(reg, oldString.replace(currentVersion, releaseStableVersion))
+          fs.writeFileSync(pomFile, newPom)
+          console.log(chalk.bold.green(`更新成功: ${pomFile}`))
+        }
       }
     }
   }

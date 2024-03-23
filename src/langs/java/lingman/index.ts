@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import { XMLParser } from 'fast-xml-parser'
 
 export async function updateLingmanVersionForJava() {
-  const { data } = await axios.get('https://git.lingman.tech:8081/repository/maven-releases/com/lm/tools/maven-metadata.xml')
+  const { data } = await axios.get('https://git.lingman.tech:8081/repository/maven-releases/com/lm/starter/lm-tools-spring-boot-starter/maven-metadata.xml')
 
   const parser = new XMLParser()
   const json = parser.parse(data) as any
@@ -20,7 +20,7 @@ export async function updateLingmanVersionForJava() {
   for (const pomFile of pomFiles) {
     const pom = fs.readFileSync(pomFile, 'utf-8')
 
-    const reg = /<groupId>com.lm<\/groupId>\s+<artifactId>tools<\/artifactId>\s+<version>(.*)<\/version>/
+    const reg = /<groupId>com.lm.starter<\/groupId>\s+<artifactId>lm-tools-spring-boot-starter<\/artifactId>\s+<version>(.*)<\/version>/
 
     if (reg.test(pom)) {
       const currentVersion = pom.match(reg)[1]
